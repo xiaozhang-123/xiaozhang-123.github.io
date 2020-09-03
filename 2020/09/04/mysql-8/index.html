@@ -16,7 +16,7 @@
 <meta property="og:description" content="use shop;– 这里使用窗口函数，partition by用法– 这里窗口的意思，不是一个个窗口的意思，是范围– 它能够像group by那样进行分类，但是不把每个类都合并起来 select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as r">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:21:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:57:42.625Z">
+<meta property="article:modified_time" content="2020-09-03T16:16:01.629Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -191,6 +191,7 @@
 <p>– 这里无partition by也行</p>
 <p>select product_name ,product_type,sale_price rank () over(order by sale_price) as ranking from product;</p>
 <p>– over这样的窗口函数不适合在where 或者group by子句里面使用<br>select product_id, product_name,sale_price sum(sale_price) over(order by product_id) as current_sum from product;<br>– 这里是按照id来排序，也就是按顺序排，然后这里的话，它也就是第一行计算和，每一行的结果计算从第一行开始，累计到这行的和。<br>– ａｖｇ也类似，这是在窗口函数里面使用聚合函数的结果</p>
+<a id="more"></a>
 <p>select product_id,product_name,sale_price,avg(sale_price) over (order by product_id rows 2 preceding ) as moving_avg from product;<br>– 这里的话，rows 2preceding的含义是截止到前面两行，也就是和上自己这一行，它这个平均数会算（自己和前面两列的）的平均数<br>– rows x preceding 也叫移动平均</p>
 <p>– 如果是要计算自己的一行和前面一行，和后一行<br>– select product_id,product_name,sale_price,avg(sale_price) over (order by product_id) rows between 1 preceding and 1 following as moving_avg from product;</p>
 <p>– 使用group by要计算合计和小计是比较麻烦的，这里使用grouping来计算<br>select product_type,sum(sale_price) as sum_price from product group by product_type with rollup;<br>– 计算出不同聚合键组合的结果</p>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="&#x2F;* 数据插入 &#x2F;&#x2F; 创建表的同时，可以默认指定默认 值，如： default 0 &#x2F;use shop;&#x2F; select * from product; *&#x2F; &#x2F;* 插入写法insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的 这里的写法是有省略列清单的，(">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:17:59.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:35:45.901Z">
+<meta property="article:modified_time" content="2020-09-03T16:14:10.297Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="md">
 <meta name="twitter:card" content="summary">
@@ -189,6 +189,7 @@
       
         <p>/* 数据插入 <em>/<br>/</em> 创建表的同时，可以默认指定默认 值，如： default 0 <em>/<br>use shop;<br>/</em> select * from product; */</p>
 <p>/* 插入写法<br>insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的<br> 这里的写法是有省略列清单的，(product_id,product_name…..)<br> 可以直接写入null<br> */</p>
+<a id="more"></a>
 <p> /* 插入默认值<br> 第一种：create table里面就设定<br> 第二种：insert into里面就设定default 0 ,接下来的插入都会默认<br> 插入时，列清单不填入就行，该列不插入<br> 如果什么都没有指定，默认null<br>  */</p>
 <p>  /* create table productcopy(<br>          product_id char(4) not null,<br>          product_name char(100) not null,<br>          product_type varchar(32) not null,<br>          sale_price integer,<br>          purchase_price integer,<br>          regist_date date,<br>          primary key(product_id)<br>  ); */</p>
 <p>  /* insert into productcopy (product_id,product_name,product_type,sale_price,purchase_price,regist_date) select product_id,product_name,product_type,sale_price,purchase_price,regist_date from product;<br>select * from productcopy;<br>这里是选取另外一个表的数据填入<br>这里的话select子句还可以插入例如where,group by这些句子，来达到选择性插入的效果<br>这里的话列清单也要写出来<br>select不仅可以显示，还可以选择对象<br> */</p>

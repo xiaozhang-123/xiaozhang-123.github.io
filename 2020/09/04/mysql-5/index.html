@@ -16,7 +16,7 @@
 <meta property="og:description" content="&#x2F;* 视图 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间&#x2F;use shop; &#x2F; create view productsum(product_type,cnt_product) as select product_type,count() from product group by product_type; *&#x2F; &#x2F; 相当于是对selec">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:18:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:38:12.857Z">
+<meta property="article:modified_time" content="2020-09-03T16:14:23.349Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -189,6 +189,7 @@
       
         <p>/* 视图<br> 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间<em>/<br>use shop;<br> /</em> create view productsum(product_type,cnt_product) as select product_type,count(<em>) from product group by product_type; */<br> /</em> 相当于是对select起一个简单的代称,设置一个select查询的快捷键 <em>/<br> /</em> select product_type,cnt_product from productsum; <em>/<br>/</em> 以后要查询这样的格式，直接用productsum就行 */</p>
 <p>/* 多重视图 <em>/<br>/</em> 在一重视图的基础上还可以再弄一层视图 <em>/<br>/</em> create view productSumJim(product_type,cnt_product) as select product type,cnt product from productSum where product_type = ‘办公用品’; <em>/<br>/</em> select product_type,cnt_product from productSumJim; <em>/<br>/</em> 这里可能多重view mysql不适用 */</p>
+<a id="more"></a>
 <p>/* 定义视图时，不能使用order by语句 <em>/<br>/</em> 因为表和view差不多，都是使用数据的 */</p>
 <p>/* 和select绑定的view一般下满足一下条件才能更新 <em>/<br>/</em> select子句未有distinct<br>from子句一张表<br>未有group语句<br>未使用having语句 <em>/<br>/</em> 如果是group后的已经是汇总的了，这个时候就难以更新<br>因为view和table需要同时更新<br>如果不是的话，单纯where的话，就可以使用insert这一些 */</p>
 <p>/* 删除使用<br>drop view productSum */</p>
