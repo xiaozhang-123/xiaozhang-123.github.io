@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>小张的博客</title>
+  <title>mysql-6-函数.md | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小张的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-6-函数.md">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="小张的博客">
+<meta property="og:description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-03T23:18:20.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:50:38.301Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="hello world">
+<meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -156,208 +160,21 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-mysql-8-窗口函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mysql-6-函数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-8-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/">mysql-8-窗口函数</a>
+    <h1 class="article-title" itemprop="name">
+      mysql-6-函数.md
     </h1>
   
  -->
       <center><p>
   
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-8-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/">mysql-8-窗口函数</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-8-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:21:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>use shop;<br>– 这里使用窗口函数，partition by用法<br>– 这里窗口的意思，不是一个个窗口的意思，是范围<br>– 它能够像group by那样进行分类，但是不把每个类都合并起来<br> select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as ranking from product;<br>–  这里的ranking意思是记录窗口的意思，计算记录排序<br>– 里面的ｐａｒｔｉｔｉｏｎ先是对type进行分类，然后的话，ｏｒｄｅｒ再进行排序，这里的好处就是同类不合并在一起</p>
-<p>– 这里无partition by也行</p>
-<p>select product_name ,product_type,sale_price rank () over(order by sale_price) as ranking from product;</p>
-<p>– over这样的窗口函数不适合在where 或者group by子句里面使用<br>select product_id, product_name,sale_price sum(sale_price) over(order by product_id) as current_sum from product;<br>– 这里是按照id来排序，也就是按顺序排，然后这里的话，它也就是第一行计算和，每一行的结果计算从第一行开始，累计到这行的和。<br>– ａｖｇ也类似，这是在窗口函数里面使用聚合函数的结果</p>
-<p>select product_id,product_name,sale_price,avg(sale_price) over (order by product_id rows 2 preceding ) as moving_avg from product;<br>– 这里的话，rows 2preceding的含义是截止到前面两行，也就是和上自己这一行，它这个平均数会算（自己和前面两列的）的平均数<br>– rows x preceding 也叫移动平均</p>
-<p>– 如果是要计算自己的一行和前面一行，和后一行<br>– select product_id,product_name,sale_price,avg(sale_price) over (order by product_id) rows between 1 preceding and 1 following as moving_avg from product;</p>
-<p>– 使用group by要计算合计和小计是比较麻烦的，这里使用grouping来计算<br>select product_type,sum(sale_price) as sum_price from product group by product_type with rollup;<br>– 计算出不同聚合键组合的结果</p>
-<p>– grouping函数能够分辨出null<br>select grouping(product_type) as product_type, grouping(regist_date) as regist_date,sum(sale_price) as sum_price from product group by rollup(product_type,regist_date);<br>– 这里的话，按product_type,regist_date排序，然后regist_date被grouping处理后会出现，没有null就是１，ｎｕｌｌ就是０</p>
-<p>– cube该句的功能是，它能够把所有可能的情况都组合一遍，就是三次方，把三者都相乘</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-8-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-7-联结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/">mysql-7-联结</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/">mysql-7-联结</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:20:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>use shop;<br>select product_id, product_name from product union select product_id,product_name from product2;<br>/* 这里的话，把两个select的对象给并集合并了起来<br> <em>/<br> /</em> 这里会去除重复的记录 */</p>
-<p>/* 这里集合运算，比如说两个select的列数不同就会报错<br>同时数据类型不一样的时候也会报错<br>但是数据类型不一样的时候可以使用转化函数<br>可以使用任意的select子句类型,如group by,having但是orderby仅仅在最后使用*/</p>
-<p>/* 如果并集的结果也要出现重复行，那么使用union all选项<br> */</p>
-<p> /* 交集<br> intersect<br> 选取不同表的公共部分<br>  <em>/<br>  /</em> select product_id,product_name<br>  from product<br>intersect<br>  select product_id,product_name<br>  from product2;<br>  order by product_id; <em>/<br>/</em> 保留全部时就 intersect all<br>这里的标准是看你select的列是写啥，是所有列的指标相等才相等<br> */</p>
-<p> /* 记录的减法<br>  <em>/<br>  /</em> select product_id, product_name from product<br>  except<br>  select product_id,product_name from product2; <em>/<br>  /</em> 相当于集合Ａ－Ｂ<br>  在Ａ里面除去另外一个的元素<br>  上下两个顺序对调的结果不一样<br>   */</p>
-<p>   /* 集合联结 <em>/<br>   /</em> 之前的集合运算是以行方向计算的<br>   就是会引起行的数量变化<br>   这里是把其他表的列添加过来 */</p>
-<p>  select sp.shop_id,sp,shop_name,sp.product_id,p.product_name,p.sale_price<br>  from shopproduct as sp<br>  inner join product as p —这里是联结，把前面的sp的列联结到后边，具体联结哪一列，就看select上面要显示哪一列，这里的话是要某一个条件对应的，所以下面的on就是条件<br>  on sp.product_id=p.product_id;–这里是联结键，列的并入需要另外一列相等才行<br>  where sp.shop_id=’000A’;–这里可以进行条件筛选<br>  /* 这里也可以使用and or来指定多个联结键<br>   */</p>
-<p>   /* 外联结 <em>/<br>select sp.shop_id,sp.shop_name,p.product_id,p.product_name,p.sale_price<br>from shopproduct as sp right outer join product as product_name<br>on sp.product_id=p.product_id;<br>/</em> 上面的内联结出现的行只会是里面双方共同出现的，但是呢，外联结里面的行元素也可以是一方独有的 <em>/<br>/</em> 使用right时，右边的表是主表，外联结会出现它独有的行<br>使用left时，左边的表是主表，外联结出现独有的行 */</p>
-<p>/* 也可以多张表进行联结<br>from shopproduct as sp inner join product as p<br>on sp.product_id = p.product_id<br>inner join inventoryproduct as ip<br>on sp.product_id =ip.product_id;<br>这里可以并列使用inner join来使用<br> */</p>
-<p> /* select distinct emp –职员名字<br> from empskills es1<br> where not exists<br> select skill<br> from skills<br> except select skill<br> from empskills es2<br> where es1.emp=es2.emp <em>/<br>/</em> 这里的话，它是要求出会所有技能的员工<br>首先，下方看起，它是一个skills集合减去(员工上下内外两个表的元素相等，确定有这个佳能)，先排除掉，如果一个人有全部技能，那么最后下方的select一定会输出空集,那么由not exists可得，输出空集成立，加上distinct可排除重复的名字得到结果，这个类似于集合的除法<br> */</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-6-函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/">mysql-6-函数.md</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/">mysql-6-函数.md</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      mysql-6-函数.md
     </h1>
   
 </p></center>
@@ -406,9 +223,34 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <!-- 添加本文结束标记-->
     
+      <div style="text-align:center;color: #00BFFF;font-size:14px;">
+         -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+         </div>
+      
       <!-- 添加完成 -->
     <div class="article-info article-info-index">
       
@@ -427,16 +269,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          mysql-7-联结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-5-视图.md</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -456,653 +366,14 @@
 
 
 
+  
+  
+  
 
   
-    <article id="post-mysql-5-视图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/">mysql-5-视图.md</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/">mysql-5-视图.md</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>/* 视图<br> 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间<em>/<br>use shop;<br> /</em> create view productsum(product_type,cnt_product) as select product_type,count(<em>) from product group by product_type; */<br> /</em> 相当于是对select起一个简单的代称,设置一个select查询的快捷键 <em>/<br> /</em> select product_type,cnt_product from productsum; <em>/<br>/</em> 以后要查询这样的格式，直接用productsum就行 */</p>
-<p>/* 多重视图 <em>/<br>/</em> 在一重视图的基础上还可以再弄一层视图 <em>/<br>/</em> create view productSumJim(product_type,cnt_product) as select product type,cnt product from productSum where product_type = ‘办公用品’; <em>/<br>/</em> select product_type,cnt_product from productSumJim; <em>/<br>/</em> 这里可能多重view mysql不适用 */</p>
-<p>/* 定义视图时，不能使用order by语句 <em>/<br>/</em> 因为表和view差不多，都是使用数据的 */</p>
-<p>/* 和select绑定的view一般下满足一下条件才能更新 <em>/<br>/</em> select子句未有distinct<br>from子句一张表<br>未有group语句<br>未使用having语句 <em>/<br>/</em> 如果是group后的已经是汇总的了，这个时候就难以更新<br>因为view和table需要同时更新<br>如果不是的话，单纯where的话，就可以使用insert这一些 */</p>
-<p>/* 删除使用<br>drop view productSum */</p>
-<p>/* 子查询<br> 一次性的，创造的子图并不会存在硬盘里面<br> 这样的话，它是定义在from里面的<br> <em>/<br>  /</em> select product_type,cnt_product from(select product_type,count(<em>) as cnt_product from product group by product_type) as productsum; */<br>  /</em> 这里的话product_type最好上下统一 <em>/<br>  /</em> 这里是里面的from里面的select先执行，然后的话再执行外层的select</p>
-<p>  因为from里面还可以在增加select，所以这里就是无限嵌套 <em>/<br>  /</em> select product_type,cnt_product<br>  from (select *<br>  from (select product_type,,count(*) as cnt_product from product group by product_type) as product_Sum<br>  where cnt<br>  =4<br>  ) as productSum2; */</p>
-<p>  /* 标量子查询<br>  只能返回某一行某一列的值 */</p>
-<p>  /* where里面使用标量子查询</p>
-<p>  where sale_price&gt; avg(sale_price);但是这里不能有聚合函数，如何做</p>
-<p>  where sale_price&gt;(select avg(sale_price) from product);这里只要保证括号里面说一个返回值就行<br>   <em>/<br>/</em> 使用一个括号就能当做一个整体 */</p>
-<p>/* 只要能保证说能返回一个，那么可以用在select,where,from,having,等等 */</p>
-<p>/* 关联子查询 <em>/<br>/</em> 在细分的组内比较使用<br>关联子查询和group by差不多，可以对数据进行切分<br>子查询里面要有关联子查询的条件<br> <em>/<br> /</em> 如果标量子句里面有groupby的话就会报错，因为它是分组，它会返回多个结果<br>  <em>/<br>  – select product_type,product_name,sale_price from product as p1<br>  – where sale_price&gt;(select avg(sale_price)<br>  – from product as p2<br>  – where p1.product_type=p2.product_type<br>  – group by product_type);<br>  /</em> 这里的原理是<br>select其实是一个个循环去比较的，这里的主体我们设为p1,它是大于该类的平均值在输出<br>这个内层呢，它是先分成一个个类，然后各自算出平均值，这里的主体是p2,这里其实是二重循环，只有当外层的种类等于内部当前循环的种类才会输出进行比较<br>这里的where p1.product_type=p2.product_type是关键，他把外部的条件和内部联系起来，只有内层的某一条件满足了才能输出这个标量<br>这个要写在子查询里面<br>关联名称有有效范围，在当前的范围，p2其实在外层就不存在了<br>*/</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
 
   
-    <article id="post-mysql-4-插入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/">mysql-4-插入.md</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/">mysql-4-插入.md</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>/* 数据插入 <em>/<br>/</em> 创建表的同时，可以默认指定默认 值，如： default 0 <em>/<br>use shop;<br>/</em> select * from product; */</p>
-<p>/* 插入写法<br>insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的<br> 这里的写法是有省略列清单的，(product_id,product_name…..)<br> 可以直接写入null<br> */</p>
-<p> /* 插入默认值<br> 第一种：create table里面就设定<br> 第二种：insert into里面就设定default 0 ,接下来的插入都会默认<br> 插入时，列清单不填入就行，该列不插入<br> 如果什么都没有指定，默认null<br>  */</p>
-<p>  /* create table productcopy(<br>          product_id char(4) not null,<br>          product_name char(100) not null,<br>          product_type varchar(32) not null,<br>          sale_price integer,<br>          purchase_price integer,<br>          regist_date date,<br>          primary key(product_id)<br>  ); */</p>
-<p>  /* insert into productcopy (product_id,product_name,product_type,sale_price,purchase_price,regist_date) select product_id,product_name,product_type,sale_price,purchase_price,regist_date from product;<br>select * from productcopy;<br>这里是选取另外一个表的数据填入<br>这里的话select子句还可以插入例如where,group by这些句子，来达到选择性插入的效果<br>这里的话列清单也要写出来<br>select不仅可以显示，还可以选择对象<br> */</p>
-<p>/* ALTER TABLE productcopy CONVERT TO CHARACTER SET utf8mb4; */</p>
-<p>/* 数据删除 <em>/<br>/</em> drop table这个是会将表完全删除，然后的话使用delete的话，它不会发生这种情况 ，数据删除了，但是那个表还在<em>/<br>/</em> 删除全部数据 <em>/<br>/</em> delete from productcopy; */</p>
-<p>/* 删除部分的数据 <em>/<br>/</em> delete from productcopy where sale_price&gt;4000; <em>/<br>/</em> 这里符合条件的才会被删除，这里不能使用group by和having 和order by */</p>
-<p>/* truncate productcopy;<br>这里不能使用where,只能删除全部数据，但是速度快很多 */</p>
-<p>/* 数据更新 <em>/<br>/</em> 使用update语句<br>可以使用where指定更新的对象，这样成为搜索型update语句<br>它可以将值更新为null<br>同时更新多列时，在update的set子句里面使用逗号分隔更新对象的多个列<br> <em>/<br>/</em> update product set regist_data=’2009-10-10’; <em>/<br>/</em> 这里是把全部的表的数据里面的日期修改了 */</p>
-<p>/* update product set regist_date=’2009-10-10’ where product_type=’衣服’; <em>/<br>/</em> 这里的话，使用where指定特定的对象 */</p>
-<p>/* NULL清空<br>update product set sale_price=NULL where product_id=’0008’;<br> */</p>
-<p> /* 多列更新 ，同时对多个数据进行更新 <em>/<br>/</em> update product set sale_price=sale_price<em>10,purchase_price=purchase_price/2 where product_type=’厨房用具’; */<br>/</em> 这里用逗号隔开多个条件，同时修改 */</p>
-<p>/* 事务 <em>/<br>/</em> 在同一个处理单元执行的一系列更新处理的集合 <em>/<br>/</em> 一个事务就是一个综合语句，含多个语句，也就是insert,delete,update这一些 */</p>
-<p>/* start transaction;<br>xxxxxxx<br>xxxxxxx<br>xxxxxxx<br>commit; <em>/<br>/</em> 一系列操作，再一次性上传 */</p>
-<p>/* 如果写错了，也可以使用回滚，就是写入之前commit上传的操作，然后它会自动帮你回到原来的状态<br> <em>/<br> start transaction;<br> xxxxxxxx<br> xxxxxxxx<br> xxxxxxxx<br> /</em> 和上面的commit里面的代码一样<br>  <em>/<br>  rollback;<br>  /</em> 这里会自动帮你恢复原来的状态 */</p>
-<p>  /* 其实每一句sql就是一个事务，这是在自动提交情况下的<br>  commit算停止一个事务 */</p>
-<p>  /* acid特性<br>  原子性，一个事务要么全部执行，要么不执行<br>  一致性，事务的处理要满足数据库提前设置的约束，如果不满足，同一个事务里面的已经执行的也会回滚<br>  隔离性，不同的事务里面是互不相通的<br>  持久性，它的数据会存在，防止数据库故障数据丢失<br>   */</p>
 
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">md</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-3-聚合函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">mysql-3-聚合函数.md</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">mysql-3-聚合函数.md</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>/* 聚合查询 <em>/<br>/</em> 聚合函数：对数据进行某种操作可以使用函数,例如<br>count:计算行数<br>sum：总和<br>avg：平均值<br>max:最大值<br>min：最小值 */<br>use shop;</p>
-<p>/* 计算行数 <em>/<br>/</em> select count(<em>) from product; */<br>/</em> 这里的<em>是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的</em>/<br>/* select count(purchase_price) from product; <em>/<br>/</em> 这里算行，非NULL的，输入不同的行结果就不一样 <em>/<br>/</em> select count(<em>),count(purchase_price) from product; */<br>/</em> 只有count才可以使用*作为形参 */</p>
-<p>/* 计算和 <em>/<br>/</em> select sum(sale_price-purchase_price) as “利润和” from product;//不建议这么写 <em>/<br>/</em> select sum(sale_price),sum(purchase_price) from product;//分开写会好一点 <em>/<br>/</em> —如果值里面有NULL，那么这一列会被排除在外 */</p>
-<p>/* 平均值同理，会自动算平均值，会把有NULL的那两列给清除 */</p>
-<p>/* Max，min同理，但它们适用与任何类型 */</p>
-<p>/* 删除重复值，distinct <em>/<br>/</em> 函数可以相互嵌套 <em>/<br>/</em> 计算种类总数 <em>/<br>/</em> select count(distinct product_type) from product; <em>/<br>/</em> 这里是相互嵌套 */</p>
-<p>/* 数据表分组 ，group by<em>/<br>/</em> 写在select字句里面<br>group by 不能有select列里面 as的别名<br>group by的结果是无序的<br>where的子句没有聚合函数 <em>/<br>/</em> select product_type,count(<em>) as “个数” from product group by product_type; */<br>/</em> 这里的原理是把先把一个表按照种类的值分成几个表，再分别列出来其个数 <em>/<br>/</em> 书写规则：<br>select -&gt;from-&gt;where-&gt;group by<br>这里的where会先进行过滤<br>真正的顺序：from ,where ,group by,select<br> */</p>
-<p>/* select purchase_price,count(<em>) from product group by purchase_price; */<br>/</em> 这里的话，含有NULL的值，当然这里是不确定，会额外分出一个组 <em>/<br>/</em> 这里group by容易出错的原因是，group by里面的列参数，那么select子句也必须对应，不能够多出来一个，否则报错<br>原因是聚合分开后，一行就是一类，一个类里面有多个不同的个体，多了一个select条件后但是如何去分开表示同一行的它们呢<br> 使用group by后，select不能带有group by外的别名<br> */</p>
-<p> /* 同时group by里面不能带有select别名,因为groupby 先于select执行 */</p>
-<p> /* group by后的结果是无序的 <em>/<br>/</em> where里面不能够带有聚合函数，where count(*)=2<br>group by和distinct相似，都有将重复的数据删除 */</p>
-<p>/* having句可以为聚合条件指定条件<br>聚合函数可以在select，having，order by里面使用<br>having写在groupby后面<br>where指定数据行的条件<br>having指定分组的条件<br> <em>/<br>/</em> having是指定分组的条件，写在groupby的后面，同时的话也是在groupby后面执行<br> <em>/<br> select product_type ,count(</em>)<br>from product<br>group by product_type<br>having count(<em>)=3;<br>/</em> 这里的话对product分出来的组进行count筛选，然后在select进行count计算 <em>/<br>select product_type,avg(sale_price)<br>from product<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/</em> 这里对选出来的组再进行平均值的筛选 <em>/<br>/</em> having里面可以写常数，聚合函数，group by子句出现的列名聚合键 <em>/<br>/</em> 这里的话<br>group by product_type having product_type=’衣服’ 这样子可以<br>group by product_type having product_name=’尺子’这样错误<br>因为group by分好组后，只有product_type这一个特征*/</p>
-<p>/* 当聚合键product_type的条件和group by一样时，那么它既可以写在where里面，也可以写在having里面 */</p>
-<p>select product_type,avg(sale_price)<br>from product<br>where product_type=’衣服’<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/* 这里的几个条件是可以共存的 ，但是聚合键对应的条件还是建议写在where里面<br>where指定行的条件<br>having指定组的条件<br>where的速度会更快，例如count需要排序，那么使用where可以先过滤在排序，但是having是先排序后分组<br>同时的话，where子句可以创建索引，更快*/</p>
-<p>/* order by语句 <em>/<br>/</em> 对查询结果进行排序<br>对order by字句列名的后面使用关键字asc可以进行升序排序，desc可以降序排序<br>order by可以使用多个排序键<br>排序包含null，在开头或者键尾进行汇总<br>order by语句可以使用select子句定义的列的别名<br>order by子句里面使用select子句未出现的lie或者聚合函数</p>
-<p>order by子句不适用列的编号</p>
-<p> <em>/<br>/</em> selsect的排序结果是随机的 <em>/<br>/</em> order语句在from后面添加 <em>/<br>/</em> select product_id,product_type,sale_price,purchase_price from product order by sale_price desc;//这里写的排序键 */</p>
-<p>/* 书写顺序<br>select-&gt;from-&gt;where-&gt;group-&gt;having-&gt;order by<br>这里的话，一般order by在select后面执行<br>order by sale_price desc;降序，以列为单位指定，可以同时指定一个列顺序，另外指定另外的列为其他的顺序<br> */</p>
-<p> /* order by sale_price desc,purchase_price asc;//这里的话是第一个列降序排好序后，然后要是出现等于的情况下，再以第二个标准升序排序 <em>/<br> /</em> 如果比较的值是null，那么的话会优先在开头或者结尾显示 */</p>
-<p> /* 这里的话，orderby里面可以使用别名 <em>/<br> /</em> 一般执行顺序，from-&gt;where -&gt;group by-&gt;having-&gt;select-&gt;order by; */</p>
-<p> /* order by里面的列可以和select不同 <em>/<br> /</em> 也可以使用聚合函数 */</p>
-<p> /* 列编号：是select子句出现的列名按照它的顺序生成的序号 <em>/<br> /</em> 这里虽然order 虽然可以使用，但是不推荐<br> select product_id,product_name,sale_price,purchase_price from product<br> order by sale_price desc, product_id;<br> //order by 3 desc,1;</p>
-<p>  */</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-2-查询基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/">mysql-2-查询基础.md</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/">mysql-2-查询基础.md</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>use shop;<br>/* select * from product;//显示全部 */</p>
-<p>/* select product_id as “编号”,<br>product_name as “名称”,<br>product_type as “种类”,<br>sale_price as “出售价格”,<br>purchase_price as “购买价格”,<br>regist_date as “登记时间”<br>from product;//设置别名 */</p>
-<p>/* select ‘商品’ as string ,<br>39 as number,<br>40 as hhhh from product;//设置新行 */</p>
-<p>/* select distinct product_type from product;<br>/* 删除重复行,每一个种类只保留一种 */</p>
-<p>/* 注意这些操作是对显示进行筛选，并不会对表数据本身产生影响 */</p>
-<p>/* select distinct purchase_price from product; */</p>
-<p>/* select distinct product_id ,purchase_price from product; <em>/<br>/</em> 这里的话要两个条件同时成立才会被删除 */</p>
-<p>/* whrer语句 ,用来筛选条件*/</p>
-<p>/* select product_name,product_type from product where product_type =’衣服’; <em>/<br>/</em> 两列显示，同时显示衣服的行 <em>/<br>/</em> select product_name from product where product_type=’衣服’;<br> <em>/<br>/</em> 这里的where和from的顺序不可调换 */</p>
-<p>/* –select可以对显示的内容进行处理，进行算术运算也行 <em>/<br>/</em> select product_id,product_name,sale_price * 2  as “价格×2” from product where product_type=”衣服”; <em>/<br>/</em> 相当于select的字句是表达式，可以对变量进行算术运算 <em>/<br>/</em> //四则运算一律涉及到null的也一定结果是null */</p>
-<p>/* 这里也可以不涉及到数据表,from不一定是必要的，select相当于print<br> <em>/<br> /</em> select 100+5*3 as “结果”; */</p>
-<p>/* 比较运算符：=等于，&lt;&gt;不等于，&lt;=,&gt;=,&lt;,&gt;这些大于小于 */</p>
-<p>/* select product_name,sale_price from product where sale_price&lt;&gt;500; <em>/<br>/</em> 非等处理 */</p>
-<p>/* select regist_date from product where regist_date&lt;’2009-09-27’;<br>这里也可以时间比较 */</p>
-<p>/* where语句里面也可以进行利润比较 <em>/<br>/</em> select product_name,sale_price,purchase_price,sale_price-purchase_price as “利润” from product where sale_price-purchase_price&gt;=500; */</p>
-<p>/* 字符串使用字典序 */</p>
-<p>/* NULL不能用于运算符，单纯使用=NULL是无法选取，要用   is NULL来选择  或者  is not NULL</p>
-<p> */</p>
-<p>/* //逻辑运算符<br> */</p>
-<p> /* 表示否定,使用nor <em>/<br>/</em> 使用时，在表达式前面加上not就ok <em>/<br>/</em> select product_name ,product_type,sale_price from product where not purchase_price&gt;=1000; */</p>
-<p>/* 在where里面也可以使用and 和or 表示并列和或者 */</p>
-<p>/* 这里也可以使用括号(),表达式扩上就可以 */</p>
-<p>/* 如果一个id值是null，那么它在  purchase_id=0003比较时，不会出现真或假，而是一种不确定的结果，就是三值思维，真假，不确定 <em>/<br>/</em> and: 真 and null-&gt;null，null and null -&gt;null，假 and null-&gt;假<br>or   ：真 or null-&gt;真，假 or null-&gt; null，null or null-&gt;null<br>所以尽量避免出现有null的情况  */</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql-1-安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/04/mysql-1-%E5%AE%89%E8%A3%85/">mysql-1-安装</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/04/mysql-1-%E5%AE%89%E8%A3%85/">mysql-1-安装</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-1-%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:16:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>mysql笔记<br>安装<br>#命令1<br>sudo apt-get update<br>#命令2<br>sudo apt-get install mysql-server</p>
-<p>卸载<br>sudo apt-get autoremove –purge mysql-server</p>
-<p>sudo apt-get remove mysql-common </p>
-<p>下面清除数据</p>
-<p>dpkg -l |grep ^rc|awk ‘{print $2}’ |sudo xargs dpkg -P </p>
-<p>初始化配置<br>sudo mysql_secure_installation</p>
-<p>检查状态<br>systemctl status mysql.servive</p>
-<p>root身份登录<br>sudo mysql -uroot -p</p>
-<p>本地local访问<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY “password”;</p>
-<p>创数据库<br>CREATE DATABASE xiaozhang;<br>设置用户<br>grant all privileges on xiaozhang.* to zhangduhuangA@”%” identified by “zhang23785491”;</p>
-<p>在云服务器上以root身份登录<br>mysql -u root -p</p>
-<p>切换至mysql数据库, 这个数据库是自带的<br>use mysql;</p>
-<p>可以通过命令查看这个数据库中有哪些表<br>show tables;</p>
-<p>从user表中查看Host, User这两列的信息<br>select Host,User from user;</p>
-<p>刷新<br>FLUSH PRIVILEGES;</p>
-<p>修改文件<br>127.0.0.1-&gt;0.0.0.0</p>
-<p>my.cnf加表头<br>[mysql]</p>
-<p>设置编码<br>alter table TABLE_NAME convert to character set utf8mb4 collate utf8mb4_bin；</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/04/mysql-1-%E5%AE%89%E8%A3%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/10/hello-world/">Hello World</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/06/10/hello-world/">Hello World</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/06/10/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-10T12:36:25.491Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
-        
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/10/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-myblog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/08/myblog/">myblog</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/06/08/myblog/">myblog</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/06/08/myblog/" class="archive-article-date">
-  	<time datetime="2020-06-08T01:14:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hhhhhh<br>我已经修改过了</p>
-
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/08/myblog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -1125,8 +396,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
