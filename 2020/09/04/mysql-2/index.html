@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-7-联结 | 小张的博客</title>
+  <title>mysql-2-查询基础.md | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="use shop;select product_id, product_name from product union select product_id,product_name from product2;&#x2F;* 这里的话，把两个select的对象给并集合并了起来 &#x2F; &#x2F; 这里会去除重复的记录 *&#x2F; &#x2F;* 这里集合运算，比如说两个select的列数不同就会报错同时数据类型不一样的时候也会报错但是">
+  <meta name="description" content="use shop;&#x2F;* select * from product;&#x2F;&#x2F;显示全部 *&#x2F; &#x2F;* select product_id as “编号”,product_name as “名称”,product_type as “种类”,sale_price as “出售价格”,purchase_price as “购买价格”,regist_date as “登记时间”from product;&#x2F;&#x2F;设置别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-7-联结">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/index.html">
+<meta property="og:title" content="mysql-2-查询基础.md">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-2/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="use shop;select product_id, product_name from product union select product_id,product_name from product2;&#x2F;* 这里的话，把两个select的对象给并集合并了起来 &#x2F; &#x2F; 这里会去除重复的记录 *&#x2F; &#x2F;* 这里集合运算，比如说两个select的列数不同就会报错同时数据类型不一样的时候也会报错但是">
+<meta property="og:description" content="use shop;&#x2F;* select * from product;&#x2F;&#x2F;显示全部 *&#x2F; &#x2F;* select product_id as “编号”,product_name as “名称”,product_type as “种类”,sale_price as “出售价格”,purchase_price as “购买价格”,regist_date as “登记时间”from product;&#x2F;&#x2F;设置别">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:20:53.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:59:38.412Z">
+<meta property="article:published_time" content="2020-09-03T23:17:08.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:34:25.573Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="mysql基础">
+<meta property="article:tag" content="hello world">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,43 +160,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-7-联结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql-2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-7-联结
+      mysql-2-查询基础.md
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-7-联结
+      mysql-2-查询基础.md
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:20:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/04/mysql-2/" class="archive-article-date">
+  	<time datetime="2020-09-03T23:17:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>use shop;<br>select product_id, product_name from product union select product_id,product_name from product2;<br>/* 这里的话，把两个select的对象给并集合并了起来<br> <em>/<br> /</em> 这里会去除重复的记录 */</p>
-<p>/* 这里集合运算，比如说两个select的列数不同就会报错<br>同时数据类型不一样的时候也会报错<br>但是数据类型不一样的时候可以使用转化函数<br>可以使用任意的select子句类型,如group by,having但是orderby仅仅在最后使用*/</p>
-<p>/* 如果并集的结果也要出现重复行，那么使用union all选项<br> */</p>
-<p> /* 交集<br> intersect<br> 选取不同表的公共部分<br>  <em>/<br>  /</em> select product_id,product_name<br>  from product<br>intersect<br>  select product_id,product_name<br>  from product2;<br>  order by product_id; <em>/<br>/</em> 保留全部时就 intersect all<br>这里的标准是看你select的列是写啥，是所有列的指标相等才相等<br> */</p>
-<p> /* 记录的减法<br>  <em>/<br>  /</em> select product_id, product_name from product<br>  except<br>  select product_id,product_name from product2; <em>/<br>  /</em> 相当于集合Ａ－Ｂ<br>  在Ａ里面除去另外一个的元素<br>  上下两个顺序对调的结果不一样<br>   */</p>
-<p>   /* 集合联结 <em>/<br>   /</em> 之前的集合运算是以行方向计算的<br>   就是会引起行的数量变化<br>   这里是把其他表的列添加过来 */</p>
-<p>  select sp.shop_id,sp,shop_name,sp.product_id,p.product_name,p.sale_price<br>  from shopproduct as sp<br>  inner join product as p —这里是联结，把前面的sp的列联结到后边，具体联结哪一列，就看select上面要显示哪一列，这里的话是要某一个条件对应的，所以下面的on就是条件<br>  on sp.product_id=p.product_id;–这里是联结键，列的并入需要另外一列相等才行<br>  where sp.shop_id=’000A’;–这里可以进行条件筛选<br>  /* 这里也可以使用and or来指定多个联结键<br>   */</p>
-<p>   /* 外联结 <em>/<br>select sp.shop_id,sp.shop_name,p.product_id,p.product_name,p.sale_price<br>from shopproduct as sp right outer join product as product_name<br>on sp.product_id=p.product_id;<br>/</em> 上面的内联结出现的行只会是里面双方共同出现的，但是呢，外联结里面的行元素也可以是一方独有的 <em>/<br>/</em> 使用right时，右边的表是主表，外联结会出现它独有的行<br>使用left时，左边的表是主表，外联结出现独有的行 */</p>
-<p>/* 也可以多张表进行联结<br>from shopproduct as sp inner join product as p<br>on sp.product_id = p.product_id<br>inner join inventoryproduct as ip<br>on sp.product_id =ip.product_id;<br>这里可以并列使用inner join来使用<br> */</p>
-<p> /* select distinct emp –职员名字<br> from empskills es1<br> where not exists<br> select skill<br> from skills<br> except select skill<br> from empskills es2<br> where es1.emp=es2.emp <em>/<br>/</em> 这里的话，它是要求出会所有技能的员工<br>首先，下方看起，它是一个skills集合减去(员工上下内外两个表的元素相等，确定有这个佳能)，先排除掉，如果一个人有全部技能，那么最后下方的select一定会输出空集,那么由not exists可得，输出空集成立，加上distinct可排除重复的名字得到结果，这个类似于集合的除法<br> */</p>
+        <p>use shop;<br>/* select * from product;//显示全部 */</p>
+<p>/* select product_id as “编号”,<br>product_name as “名称”,<br>product_type as “种类”,<br>sale_price as “出售价格”,<br>purchase_price as “购买价格”,<br>regist_date as “登记时间”<br>from product;//设置别名 */</p>
+<p>/* select ‘商品’ as string ,<br>39 as number,<br>40 as hhhh from product;//设置新行 */</p>
+<p>/* select distinct product_type from product;<br>/* 删除重复行,每一个种类只保留一种 */</p>
+<p>/* 注意这些操作是对显示进行筛选，并不会对表数据本身产生影响 */</p>
+<p>/* select distinct purchase_price from product; */</p>
+<p>/* select distinct product_id ,purchase_price from product; <em>/<br>/</em> 这里的话要两个条件同时成立才会被删除 */</p>
+<p>/* whrer语句 ,用来筛选条件*/</p>
+<p>/* select product_name,product_type from product where product_type =’衣服’; <em>/<br>/</em> 两列显示，同时显示衣服的行 <em>/<br>/</em> select product_name from product where product_type=’衣服’;<br> <em>/<br>/</em> 这里的where和from的顺序不可调换 */</p>
+<p>/* –select可以对显示的内容进行处理，进行算术运算也行 <em>/<br>/</em> select product_id,product_name,sale_price * 2  as “价格×2” from product where product_type=”衣服”; <em>/<br>/</em> 相当于select的字句是表达式，可以对变量进行算术运算 <em>/<br>/</em> //四则运算一律涉及到null的也一定结果是null */</p>
+<p>/* 这里也可以不涉及到数据表,from不一定是必要的，select相当于print<br> <em>/<br> /</em> select 100+5*3 as “结果”; */</p>
+<p>/* 比较运算符：=等于，&lt;&gt;不等于，&lt;=,&gt;=,&lt;,&gt;这些大于小于 */</p>
+<p>/* select product_name,sale_price from product where sale_price&lt;&gt;500; <em>/<br>/</em> 非等处理 */</p>
+<p>/* select regist_date from product where regist_date&lt;’2009-09-27’;<br>这里也可以时间比较 */</p>
+<p>/* where语句里面也可以进行利润比较 <em>/<br>/</em> select product_name,sale_price,purchase_price,sale_price-purchase_price as “利润” from product where sale_price-purchase_price&gt;=500; */</p>
+<p>/* 字符串使用字典序 */</p>
+<p>/* NULL不能用于运算符，单纯使用=NULL是无法选取，要用   is NULL来选择  或者  is not NULL</p>
+<p> */</p>
+<p>/* //逻辑运算符<br> */</p>
+<p> /* 表示否定,使用nor <em>/<br>/</em> 使用时，在表达式前面加上not就ok <em>/<br>/</em> select product_name ,product_type,sale_price from product where not purchase_price&gt;=1000; */</p>
+<p>/* 在where里面也可以使用and 和or 表示并列和或者 */</p>
+<p>/* 这里也可以使用括号(),表达式扩上就可以 */</p>
+<p>/* 如果一个id值是null，那么它在  purchase_id=0003比较时，不会出现真或假，而是一种不确定的结果，就是三值思维，真假，不确定 <em>/<br>/</em> and: 真 and null-&gt;null，null and null -&gt;null，假 and null-&gt;假<br>or   ：真 or null-&gt;真，假 or null-&gt; null，null or null-&gt;null<br>所以尽量避免出现有null的情况  */</p>
 
       
 
@@ -233,17 +246,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -294,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-7-%E8%81%94%E7%BB%93/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -308,18 +310,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/04/mysql-8-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/04/mysql-3/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-8-窗口函数
+          mysql-3-聚合函数.md
         
       </div>
     </a>
   
   
-    <a href="/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-6-函数.md</div>
+    <a href="/2020/09/04/mysql-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-1-安装</div>
       <i class="icon-circle-right"></i>
     </a>
   

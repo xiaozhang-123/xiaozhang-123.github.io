@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-2-查询基础.md | 小张的博客</title>
+  <title>mysql-3-聚合函数.md | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="use shop;&#x2F;* select * from product;&#x2F;&#x2F;显示全部 *&#x2F; &#x2F;* select product_id as “编号”,product_name as “名称”,product_type as “种类”,sale_price as “出售价格”,purchase_price as “购买价格”,regist_date as “登记时间”from product;&#x2F;&#x2F;设置别">
+  <meta name="description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop; &#x2F;* 计算行数 &#x2F;&#x2F; select count() from product; *&#x2F;&#x2F; 这里的是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的&#x2F;&#x2F;* select count(purchase_pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-2-查询基础.md">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="mysql-3-聚合函数.md">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-3/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="use shop;&#x2F;* select * from product;&#x2F;&#x2F;显示全部 *&#x2F; &#x2F;* select product_id as “编号”,product_name as “名称”,product_type as “种类”,sale_price as “出售价格”,purchase_price as “购买价格”,regist_date as “登记时间”from product;&#x2F;&#x2F;设置别">
+<meta property="og:description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop; &#x2F;* 计算行数 &#x2F;&#x2F; select count() from product; *&#x2F;&#x2F; 这里的是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的&#x2F;&#x2F;* select count(purchase_pr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:17:08.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:34:25.573Z">
+<meta property="article:published_time" content="2020-09-03T23:17:26.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:35:11.657Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="hello world">
+<meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,56 +160,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-2-查询基础" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql-3" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-2-查询基础.md
+      mysql-3-聚合函数.md
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-2-查询基础.md
+      mysql-3-聚合函数.md
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/04/mysql-3/" class="archive-article-date">
+  	<time datetime="2020-09-03T23:17:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>use shop;<br>/* select * from product;//显示全部 */</p>
-<p>/* select product_id as “编号”,<br>product_name as “名称”,<br>product_type as “种类”,<br>sale_price as “出售价格”,<br>purchase_price as “购买价格”,<br>regist_date as “登记时间”<br>from product;//设置别名 */</p>
-<p>/* select ‘商品’ as string ,<br>39 as number,<br>40 as hhhh from product;//设置新行 */</p>
-<p>/* select distinct product_type from product;<br>/* 删除重复行,每一个种类只保留一种 */</p>
-<p>/* 注意这些操作是对显示进行筛选，并不会对表数据本身产生影响 */</p>
-<p>/* select distinct purchase_price from product; */</p>
-<p>/* select distinct product_id ,purchase_price from product; <em>/<br>/</em> 这里的话要两个条件同时成立才会被删除 */</p>
-<p>/* whrer语句 ,用来筛选条件*/</p>
-<p>/* select product_name,product_type from product where product_type =’衣服’; <em>/<br>/</em> 两列显示，同时显示衣服的行 <em>/<br>/</em> select product_name from product where product_type=’衣服’;<br> <em>/<br>/</em> 这里的where和from的顺序不可调换 */</p>
-<p>/* –select可以对显示的内容进行处理，进行算术运算也行 <em>/<br>/</em> select product_id,product_name,sale_price * 2  as “价格×2” from product where product_type=”衣服”; <em>/<br>/</em> 相当于select的字句是表达式，可以对变量进行算术运算 <em>/<br>/</em> //四则运算一律涉及到null的也一定结果是null */</p>
-<p>/* 这里也可以不涉及到数据表,from不一定是必要的，select相当于print<br> <em>/<br> /</em> select 100+5*3 as “结果”; */</p>
-<p>/* 比较运算符：=等于，&lt;&gt;不等于，&lt;=,&gt;=,&lt;,&gt;这些大于小于 */</p>
-<p>/* select product_name,sale_price from product where sale_price&lt;&gt;500; <em>/<br>/</em> 非等处理 */</p>
-<p>/* select regist_date from product where regist_date&lt;’2009-09-27’;<br>这里也可以时间比较 */</p>
-<p>/* where语句里面也可以进行利润比较 <em>/<br>/</em> select product_name,sale_price,purchase_price,sale_price-purchase_price as “利润” from product where sale_price-purchase_price&gt;=500; */</p>
-<p>/* 字符串使用字典序 */</p>
-<p>/* NULL不能用于运算符，单纯使用=NULL是无法选取，要用   is NULL来选择  或者  is not NULL</p>
-<p> */</p>
-<p>/* //逻辑运算符<br> */</p>
-<p> /* 表示否定,使用nor <em>/<br>/</em> 使用时，在表达式前面加上not就ok <em>/<br>/</em> select product_name ,product_type,sale_price from product where not purchase_price&gt;=1000; */</p>
-<p>/* 在where里面也可以使用and 和or 表示并列和或者 */</p>
-<p>/* 这里也可以使用括号(),表达式扩上就可以 */</p>
-<p>/* 如果一个id值是null，那么它在  purchase_id=0003比较时，不会出现真或假，而是一种不确定的结果，就是三值思维，真假，不确定 <em>/<br>/</em> and: 真 and null-&gt;null，null and null -&gt;null，假 and null-&gt;假<br>or   ：真 or null-&gt;真，假 or null-&gt; null，null or null-&gt;null<br>所以尽量避免出现有null的情况  */</p>
+        <p>/* 聚合查询 <em>/<br>/</em> 聚合函数：对数据进行某种操作可以使用函数,例如<br>count:计算行数<br>sum：总和<br>avg：平均值<br>max:最大值<br>min：最小值 */<br>use shop;</p>
+<p>/* 计算行数 <em>/<br>/</em> select count(<em>) from product; */<br>/</em> 这里的<em>是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的</em>/<br>/* select count(purchase_price) from product; <em>/<br>/</em> 这里算行，非NULL的，输入不同的行结果就不一样 <em>/<br>/</em> select count(<em>),count(purchase_price) from product; */<br>/</em> 只有count才可以使用*作为形参 */</p>
+<p>/* 计算和 <em>/<br>/</em> select sum(sale_price-purchase_price) as “利润和” from product;//不建议这么写 <em>/<br>/</em> select sum(sale_price),sum(purchase_price) from product;//分开写会好一点 <em>/<br>/</em> —如果值里面有NULL，那么这一列会被排除在外 */</p>
+<p>/* 平均值同理，会自动算平均值，会把有NULL的那两列给清除 */</p>
+<p>/* Max，min同理，但它们适用与任何类型 */</p>
+<p>/* 删除重复值，distinct <em>/<br>/</em> 函数可以相互嵌套 <em>/<br>/</em> 计算种类总数 <em>/<br>/</em> select count(distinct product_type) from product; <em>/<br>/</em> 这里是相互嵌套 */</p>
+<p>/* 数据表分组 ，group by<em>/<br>/</em> 写在select字句里面<br>group by 不能有select列里面 as的别名<br>group by的结果是无序的<br>where的子句没有聚合函数 <em>/<br>/</em> select product_type,count(<em>) as “个数” from product group by product_type; */<br>/</em> 这里的原理是把先把一个表按照种类的值分成几个表，再分别列出来其个数 <em>/<br>/</em> 书写规则：<br>select -&gt;from-&gt;where-&gt;group by<br>这里的where会先进行过滤<br>真正的顺序：from ,where ,group by,select<br> */</p>
+<p>/* select purchase_price,count(<em>) from product group by purchase_price; */<br>/</em> 这里的话，含有NULL的值，当然这里是不确定，会额外分出一个组 <em>/<br>/</em> 这里group by容易出错的原因是，group by里面的列参数，那么select子句也必须对应，不能够多出来一个，否则报错<br>原因是聚合分开后，一行就是一类，一个类里面有多个不同的个体，多了一个select条件后但是如何去分开表示同一行的它们呢<br> 使用group by后，select不能带有group by外的别名<br> */</p>
+<p> /* 同时group by里面不能带有select别名,因为groupby 先于select执行 */</p>
+<p> /* group by后的结果是无序的 <em>/<br>/</em> where里面不能够带有聚合函数，where count(*)=2<br>group by和distinct相似，都有将重复的数据删除 */</p>
+<p>/* having句可以为聚合条件指定条件<br>聚合函数可以在select，having，order by里面使用<br>having写在groupby后面<br>where指定数据行的条件<br>having指定分组的条件<br> <em>/<br>/</em> having是指定分组的条件，写在groupby的后面，同时的话也是在groupby后面执行<br> <em>/<br> select product_type ,count(</em>)<br>from product<br>group by product_type<br>having count(<em>)=3;<br>/</em> 这里的话对product分出来的组进行count筛选，然后在select进行count计算 <em>/<br>select product_type,avg(sale_price)<br>from product<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/</em> 这里对选出来的组再进行平均值的筛选 <em>/<br>/</em> having里面可以写常数，聚合函数，group by子句出现的列名聚合键 <em>/<br>/</em> 这里的话<br>group by product_type having product_type=’衣服’ 这样子可以<br>group by product_type having product_name=’尺子’这样错误<br>因为group by分好组后，只有product_type这一个特征*/</p>
+<p>/* 当聚合键product_type的条件和group by一样时，那么它既可以写在where里面，也可以写在having里面 */</p>
+<p>select product_type,avg(sale_price)<br>from product<br>where product_type=’衣服’<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/* 这里的几个条件是可以共存的 ，但是聚合键对应的条件还是建议写在where里面<br>where指定行的条件<br>having指定组的条件<br>where的速度会更快，例如count需要排序，那么使用where可以先过滤在排序，但是having是先排序后分组<br>同时的话，where子句可以创建索引，更快*/</p>
+<p>/* order by语句 <em>/<br>/</em> 对查询结果进行排序<br>对order by字句列名的后面使用关键字asc可以进行升序排序，desc可以降序排序<br>order by可以使用多个排序键<br>排序包含null，在开头或者键尾进行汇总<br>order by语句可以使用select子句定义的列的别名<br>order by子句里面使用select子句未出现的lie或者聚合函数</p>
+<p>order by子句不适用列的编号</p>
+<p> <em>/<br>/</em> selsect的排序结果是随机的 <em>/<br>/</em> order语句在from后面添加 <em>/<br>/</em> select product_id,product_type,sale_price,purchase_price from product order by sale_price desc;//这里写的排序键 */</p>
+<p>/* 书写顺序<br>select-&gt;from-&gt;where-&gt;group-&gt;having-&gt;order by<br>这里的话，一般order by在select后面执行<br>order by sale_price desc;降序，以列为单位指定，可以同时指定一个列顺序，另外指定另外的列为其他的顺序<br> */</p>
+<p> /* order by sale_price desc,purchase_price asc;//这里的话是第一个列降序排好序后，然后要是出现等于的情况下，再以第二个标准升序排序 <em>/<br> /</em> 如果比较的值是null，那么的话会优先在开头或者结尾显示 */</p>
+<p> /* 这里的话，orderby里面可以使用别名 <em>/<br> /</em> 一般执行顺序，from-&gt;where -&gt;group by-&gt;having-&gt;select-&gt;order by; */</p>
+<p> /* order by里面的列可以和select不同 <em>/<br> /</em> 也可以使用聚合函数 */</p>
+<p> /* 列编号：是select子句出现的列名按照它的顺序生成的序号 <em>/<br> /</em> 这里虽然order 虽然可以使用，但是不推荐<br> select product_id,product_name,sale_price,purchase_price from product<br> order by sale_price desc, product_id;<br> //order by 3 desc,1;</p>
+<p>  */</p>
 
       
 
@@ -246,6 +245,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -296,7 +306,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +320,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/04/mysql-4/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-3-聚合函数.md
+          mysql-4-插入.md
         
       </div>
     </a>
   
   
-    <a href="/2020/09/04/mysql-1-%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-1-安装</div>
+    <a href="/2020/09/04/mysql-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-2-查询基础.md</div>
       <i class="icon-circle-right"></i>
     </a>
   

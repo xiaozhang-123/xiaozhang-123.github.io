@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-4-插入.md | 小张的博客</title>
+  <title>mysql-1-安装 | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&#x2F;* 数据插入 &#x2F;&#x2F; 创建表的同时，可以默认指定默认 值，如： default 0 &#x2F;use shop;&#x2F; select * from product; *&#x2F; &#x2F;* 插入写法insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的 这里的写法是有省略列清单的，(">
+  <meta name="description" content="mysql笔记安装#命令1sudo apt-get update#命令2sudo apt-get install mysql-server 卸载sudo apt-get autoremove –purge mysql-server sudo apt-get remove mysql-common  下面清除数据 dpkg -l |grep ^rc|awk ‘{print $2}’ |sudo xa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-4-插入.md">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/index.html">
+<meta property="og:title" content="mysql-1-安装">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-1/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="&#x2F;* 数据插入 &#x2F;&#x2F; 创建表的同时，可以默认指定默认 值，如： default 0 &#x2F;use shop;&#x2F; select * from product; *&#x2F; &#x2F;* 插入写法insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的 这里的写法是有省略列清单的，(">
+<meta property="og:description" content="mysql笔记安装#命令1sudo apt-get update#命令2sudo apt-get install mysql-server 卸载sudo apt-get autoremove –purge mysql-server sudo apt-get remove mysql-common  下面清除数据 dpkg -l |grep ^rc|awk ‘{print $2}’ |sudo xa">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:17:59.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:35:45.901Z">
+<meta property="article:published_time" content="2020-09-03T23:16:27.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:33:23.513Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="md">
+<meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,51 +160,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-4-插入" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-4-插入.md
+      mysql-1-安装
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-4-插入.md
+      mysql-1-安装
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/04/mysql-1/" class="archive-article-date">
+  	<time datetime="2020-09-03T23:16:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/* 数据插入 <em>/<br>/</em> 创建表的同时，可以默认指定默认 值，如： default 0 <em>/<br>use shop;<br>/</em> select * from product; */</p>
-<p>/* 插入写法<br>insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的<br> 这里的写法是有省略列清单的，(product_id,product_name…..)<br> 可以直接写入null<br> */</p>
-<p> /* 插入默认值<br> 第一种：create table里面就设定<br> 第二种：insert into里面就设定default 0 ,接下来的插入都会默认<br> 插入时，列清单不填入就行，该列不插入<br> 如果什么都没有指定，默认null<br>  */</p>
-<p>  /* create table productcopy(<br>          product_id char(4) not null,<br>          product_name char(100) not null,<br>          product_type varchar(32) not null,<br>          sale_price integer,<br>          purchase_price integer,<br>          regist_date date,<br>          primary key(product_id)<br>  ); */</p>
-<p>  /* insert into productcopy (product_id,product_name,product_type,sale_price,purchase_price,regist_date) select product_id,product_name,product_type,sale_price,purchase_price,regist_date from product;<br>select * from productcopy;<br>这里是选取另外一个表的数据填入<br>这里的话select子句还可以插入例如where,group by这些句子，来达到选择性插入的效果<br>这里的话列清单也要写出来<br>select不仅可以显示，还可以选择对象<br> */</p>
-<p>/* ALTER TABLE productcopy CONVERT TO CHARACTER SET utf8mb4; */</p>
-<p>/* 数据删除 <em>/<br>/</em> drop table这个是会将表完全删除，然后的话使用delete的话，它不会发生这种情况 ，数据删除了，但是那个表还在<em>/<br>/</em> 删除全部数据 <em>/<br>/</em> delete from productcopy; */</p>
-<p>/* 删除部分的数据 <em>/<br>/</em> delete from productcopy where sale_price&gt;4000; <em>/<br>/</em> 这里符合条件的才会被删除，这里不能使用group by和having 和order by */</p>
-<p>/* truncate productcopy;<br>这里不能使用where,只能删除全部数据，但是速度快很多 */</p>
-<p>/* 数据更新 <em>/<br>/</em> 使用update语句<br>可以使用where指定更新的对象，这样成为搜索型update语句<br>它可以将值更新为null<br>同时更新多列时，在update的set子句里面使用逗号分隔更新对象的多个列<br> <em>/<br>/</em> update product set regist_data=’2009-10-10’; <em>/<br>/</em> 这里是把全部的表的数据里面的日期修改了 */</p>
-<p>/* update product set regist_date=’2009-10-10’ where product_type=’衣服’; <em>/<br>/</em> 这里的话，使用where指定特定的对象 */</p>
-<p>/* NULL清空<br>update product set sale_price=NULL where product_id=’0008’;<br> */</p>
-<p> /* 多列更新 ，同时对多个数据进行更新 <em>/<br>/</em> update product set sale_price=sale_price<em>10,purchase_price=purchase_price/2 where product_type=’厨房用具’; */<br>/</em> 这里用逗号隔开多个条件，同时修改 */</p>
-<p>/* 事务 <em>/<br>/</em> 在同一个处理单元执行的一系列更新处理的集合 <em>/<br>/</em> 一个事务就是一个综合语句，含多个语句，也就是insert,delete,update这一些 */</p>
-<p>/* start transaction;<br>xxxxxxx<br>xxxxxxx<br>xxxxxxx<br>commit; <em>/<br>/</em> 一系列操作，再一次性上传 */</p>
-<p>/* 如果写错了，也可以使用回滚，就是写入之前commit上传的操作，然后它会自动帮你回到原来的状态<br> <em>/<br> start transaction;<br> xxxxxxxx<br> xxxxxxxx<br> xxxxxxxx<br> /</em> 和上面的commit里面的代码一样<br>  <em>/<br>  rollback;<br>  /</em> 这里会自动帮你恢复原来的状态 */</p>
-<p>  /* 其实每一句sql就是一个事务，这是在自动提交情况下的<br>  commit算停止一个事务 */</p>
-<p>  /* acid特性<br>  原子性，一个事务要么全部执行，要么不执行<br>  一致性，事务的处理要满足数据库提前设置的约束，如果不满足，同一个事务里面的已经执行的也会回滚<br>  隔离性，不同的事务里面是互不相通的<br>  持久性，它的数据会存在，防止数据库故障数据丢失<br>   */</p>
+        <p>mysql笔记<br>安装<br>#命令1<br>sudo apt-get update<br>#命令2<br>sudo apt-get install mysql-server</p>
+<p>卸载<br>sudo apt-get autoremove –purge mysql-server</p>
+<p>sudo apt-get remove mysql-common </p>
+<p>下面清除数据</p>
+<p>dpkg -l |grep ^rc|awk ‘{print $2}’ |sudo xargs dpkg -P </p>
+<p>初始化配置<br>sudo mysql_secure_installation</p>
+<p>检查状态<br>systemctl status mysql.servive</p>
+<p>root身份登录<br>sudo mysql -uroot -p</p>
+<p>本地local访问<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY “password”;</p>
+<p>创数据库<br>CREATE DATABASE xiaozhang;<br>设置用户<br>grant all privileges on xiaozhang.* to zhangduhuangA@”%” identified by “zhang23785491”;</p>
+<p>在云服务器上以root身份登录<br>mysql -u root -p</p>
+<p>切换至mysql数据库, 这个数据库是自带的<br>use mysql;</p>
+<p>可以通过命令查看这个数据库中有哪些表<br>show tables;</p>
+<p>从user表中查看Host, User这两列的信息<br>select Host,User from user;</p>
+<p>刷新<br>FLUSH PRIVILEGES;</p>
+<p>修改文件<br>127.0.0.1-&gt;0.0.0.0</p>
+<p>my.cnf加表头<br>[mysql]</p>
+<p>设置编码<br>alter table TABLE_NAME convert to character set utf8mb4 collate utf8mb4_bin；</p>
 
       
 
@@ -246,7 +246,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">md</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
         		</li>
       		
 		</ul>
@@ -302,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +316,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/04/mysql-2/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-5-视图.md
+          mysql-2-查询基础.md
         
       </div>
     </a>
   
   
-    <a href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-3-聚合函数.md</div>
+    <a href="/2020/06/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
       <i class="icon-circle-right"></i>
     </a>
   

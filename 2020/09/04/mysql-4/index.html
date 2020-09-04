@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-3-聚合函数.md | 小张的博客</title>
+  <title>mysql-4-插入.md | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop; &#x2F;* 计算行数 &#x2F;&#x2F; select count() from product; *&#x2F;&#x2F; 这里的是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的&#x2F;&#x2F;* select count(purchase_pr">
+  <meta name="description" content="&#x2F;* 数据插入 &#x2F;&#x2F; 创建表的同时，可以默认指定默认 值，如： default 0 &#x2F;use shop;&#x2F; select * from product; *&#x2F; &#x2F;* 插入写法insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的 这里的写法是有省略列清单的，(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-3-聚合函数.md">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="mysql-4-插入.md">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-4/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop; &#x2F;* 计算行数 &#x2F;&#x2F; select count() from product; *&#x2F;&#x2F; 这里的是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的&#x2F;&#x2F;* select count(purchase_pr">
+<meta property="og:description" content="&#x2F;* 数据插入 &#x2F;&#x2F; 创建表的同时，可以默认指定默认 值，如： default 0 &#x2F;use shop;&#x2F; select * from product; *&#x2F; &#x2F;* 插入写法insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的 这里的写法是有省略列清单的，(">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:17:26.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:35:11.657Z">
+<meta property="article:published_time" content="2020-09-03T23:17:59.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:35:45.901Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="mysql基础">
+<meta property="article:tag" content="md">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,55 +160,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-3-聚合函数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql-4" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-3-聚合函数.md
+      mysql-4-插入.md
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-3-聚合函数.md
+      mysql-4-插入.md
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:17:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/04/mysql-4/" class="archive-article-date">
+  	<time datetime="2020-09-03T23:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/* 聚合查询 <em>/<br>/</em> 聚合函数：对数据进行某种操作可以使用函数,例如<br>count:计算行数<br>sum：总和<br>avg：平均值<br>max:最大值<br>min：最小值 */<br>use shop;</p>
-<p>/* 计算行数 <em>/<br>/</em> select count(<em>) from product; */<br>/</em> 这里的<em>是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的</em>/<br>/* select count(purchase_price) from product; <em>/<br>/</em> 这里算行，非NULL的，输入不同的行结果就不一样 <em>/<br>/</em> select count(<em>),count(purchase_price) from product; */<br>/</em> 只有count才可以使用*作为形参 */</p>
-<p>/* 计算和 <em>/<br>/</em> select sum(sale_price-purchase_price) as “利润和” from product;//不建议这么写 <em>/<br>/</em> select sum(sale_price),sum(purchase_price) from product;//分开写会好一点 <em>/<br>/</em> —如果值里面有NULL，那么这一列会被排除在外 */</p>
-<p>/* 平均值同理，会自动算平均值，会把有NULL的那两列给清除 */</p>
-<p>/* Max，min同理，但它们适用与任何类型 */</p>
-<p>/* 删除重复值，distinct <em>/<br>/</em> 函数可以相互嵌套 <em>/<br>/</em> 计算种类总数 <em>/<br>/</em> select count(distinct product_type) from product; <em>/<br>/</em> 这里是相互嵌套 */</p>
-<p>/* 数据表分组 ，group by<em>/<br>/</em> 写在select字句里面<br>group by 不能有select列里面 as的别名<br>group by的结果是无序的<br>where的子句没有聚合函数 <em>/<br>/</em> select product_type,count(<em>) as “个数” from product group by product_type; */<br>/</em> 这里的原理是把先把一个表按照种类的值分成几个表，再分别列出来其个数 <em>/<br>/</em> 书写规则：<br>select -&gt;from-&gt;where-&gt;group by<br>这里的where会先进行过滤<br>真正的顺序：from ,where ,group by,select<br> */</p>
-<p>/* select purchase_price,count(<em>) from product group by purchase_price; */<br>/</em> 这里的话，含有NULL的值，当然这里是不确定，会额外分出一个组 <em>/<br>/</em> 这里group by容易出错的原因是，group by里面的列参数，那么select子句也必须对应，不能够多出来一个，否则报错<br>原因是聚合分开后，一行就是一类，一个类里面有多个不同的个体，多了一个select条件后但是如何去分开表示同一行的它们呢<br> 使用group by后，select不能带有group by外的别名<br> */</p>
-<p> /* 同时group by里面不能带有select别名,因为groupby 先于select执行 */</p>
-<p> /* group by后的结果是无序的 <em>/<br>/</em> where里面不能够带有聚合函数，where count(*)=2<br>group by和distinct相似，都有将重复的数据删除 */</p>
-<p>/* having句可以为聚合条件指定条件<br>聚合函数可以在select，having，order by里面使用<br>having写在groupby后面<br>where指定数据行的条件<br>having指定分组的条件<br> <em>/<br>/</em> having是指定分组的条件，写在groupby的后面，同时的话也是在groupby后面执行<br> <em>/<br> select product_type ,count(</em>)<br>from product<br>group by product_type<br>having count(<em>)=3;<br>/</em> 这里的话对product分出来的组进行count筛选，然后在select进行count计算 <em>/<br>select product_type,avg(sale_price)<br>from product<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/</em> 这里对选出来的组再进行平均值的筛选 <em>/<br>/</em> having里面可以写常数，聚合函数，group by子句出现的列名聚合键 <em>/<br>/</em> 这里的话<br>group by product_type having product_type=’衣服’ 这样子可以<br>group by product_type having product_name=’尺子’这样错误<br>因为group by分好组后，只有product_type这一个特征*/</p>
-<p>/* 当聚合键product_type的条件和group by一样时，那么它既可以写在where里面，也可以写在having里面 */</p>
-<p>select product_type,avg(sale_price)<br>from product<br>where product_type=’衣服’<br>group by product_type<br>having avg(sale_price)&gt;=2000;<br>/* 这里的几个条件是可以共存的 ，但是聚合键对应的条件还是建议写在where里面<br>where指定行的条件<br>having指定组的条件<br>where的速度会更快，例如count需要排序，那么使用where可以先过滤在排序，但是having是先排序后分组<br>同时的话，where子句可以创建索引，更快*/</p>
-<p>/* order by语句 <em>/<br>/</em> 对查询结果进行排序<br>对order by字句列名的后面使用关键字asc可以进行升序排序，desc可以降序排序<br>order by可以使用多个排序键<br>排序包含null，在开头或者键尾进行汇总<br>order by语句可以使用select子句定义的列的别名<br>order by子句里面使用select子句未出现的lie或者聚合函数</p>
-<p>order by子句不适用列的编号</p>
-<p> <em>/<br>/</em> selsect的排序结果是随机的 <em>/<br>/</em> order语句在from后面添加 <em>/<br>/</em> select product_id,product_type,sale_price,purchase_price from product order by sale_price desc;//这里写的排序键 */</p>
-<p>/* 书写顺序<br>select-&gt;from-&gt;where-&gt;group-&gt;having-&gt;order by<br>这里的话，一般order by在select后面执行<br>order by sale_price desc;降序，以列为单位指定，可以同时指定一个列顺序，另外指定另外的列为其他的顺序<br> */</p>
-<p> /* order by sale_price desc,purchase_price asc;//这里的话是第一个列降序排好序后，然后要是出现等于的情况下，再以第二个标准升序排序 <em>/<br> /</em> 如果比较的值是null，那么的话会优先在开头或者结尾显示 */</p>
-<p> /* 这里的话，orderby里面可以使用别名 <em>/<br> /</em> 一般执行顺序，from-&gt;where -&gt;group by-&gt;having-&gt;select-&gt;order by; */</p>
-<p> /* order by里面的列可以和select不同 <em>/<br> /</em> 也可以使用聚合函数 */</p>
-<p> /* 列编号：是select子句出现的列名按照它的顺序生成的序号 <em>/<br> /</em> 这里虽然order 虽然可以使用，但是不推荐<br> select product_id,product_name,sale_price,purchase_price from product<br> order by sale_price desc, product_id;<br> //order by 3 desc,1;</p>
-<p>  */</p>
+        <p>/* 数据插入 <em>/<br>/</em> 创建表的同时，可以默认指定默认 值，如： default 0 <em>/<br>use shop;<br>/</em> select * from product; */</p>
+<p>/* 插入写法<br>insert into  product valuse(‘0001’,’T恤’，’衣服’,1000,500),(‘0002’,’裙子’,’衣服’,1400,2000);这里是可以一次性写入多个的<br> 这里的写法是有省略列清单的，(product_id,product_name…..)<br> 可以直接写入null<br> */</p>
+<p> /* 插入默认值<br> 第一种：create table里面就设定<br> 第二种：insert into里面就设定default 0 ,接下来的插入都会默认<br> 插入时，列清单不填入就行，该列不插入<br> 如果什么都没有指定，默认null<br>  */</p>
+<p>  /* create table productcopy(<br>          product_id char(4) not null,<br>          product_name char(100) not null,<br>          product_type varchar(32) not null,<br>          sale_price integer,<br>          purchase_price integer,<br>          regist_date date,<br>          primary key(product_id)<br>  ); */</p>
+<p>  /* insert into productcopy (product_id,product_name,product_type,sale_price,purchase_price,regist_date) select product_id,product_name,product_type,sale_price,purchase_price,regist_date from product;<br>select * from productcopy;<br>这里是选取另外一个表的数据填入<br>这里的话select子句还可以插入例如where,group by这些句子，来达到选择性插入的效果<br>这里的话列清单也要写出来<br>select不仅可以显示，还可以选择对象<br> */</p>
+<p>/* ALTER TABLE productcopy CONVERT TO CHARACTER SET utf8mb4; */</p>
+<p>/* 数据删除 <em>/<br>/</em> drop table这个是会将表完全删除，然后的话使用delete的话，它不会发生这种情况 ，数据删除了，但是那个表还在<em>/<br>/</em> 删除全部数据 <em>/<br>/</em> delete from productcopy; */</p>
+<p>/* 删除部分的数据 <em>/<br>/</em> delete from productcopy where sale_price&gt;4000; <em>/<br>/</em> 这里符合条件的才会被删除，这里不能使用group by和having 和order by */</p>
+<p>/* truncate productcopy;<br>这里不能使用where,只能删除全部数据，但是速度快很多 */</p>
+<p>/* 数据更新 <em>/<br>/</em> 使用update语句<br>可以使用where指定更新的对象，这样成为搜索型update语句<br>它可以将值更新为null<br>同时更新多列时，在update的set子句里面使用逗号分隔更新对象的多个列<br> <em>/<br>/</em> update product set regist_data=’2009-10-10’; <em>/<br>/</em> 这里是把全部的表的数据里面的日期修改了 */</p>
+<p>/* update product set regist_date=’2009-10-10’ where product_type=’衣服’; <em>/<br>/</em> 这里的话，使用where指定特定的对象 */</p>
+<p>/* NULL清空<br>update product set sale_price=NULL where product_id=’0008’;<br> */</p>
+<p> /* 多列更新 ，同时对多个数据进行更新 <em>/<br>/</em> update product set sale_price=sale_price<em>10,purchase_price=purchase_price/2 where product_type=’厨房用具’; */<br>/</em> 这里用逗号隔开多个条件，同时修改 */</p>
+<p>/* 事务 <em>/<br>/</em> 在同一个处理单元执行的一系列更新处理的集合 <em>/<br>/</em> 一个事务就是一个综合语句，含多个语句，也就是insert,delete,update这一些 */</p>
+<p>/* start transaction;<br>xxxxxxx<br>xxxxxxx<br>xxxxxxx<br>commit; <em>/<br>/</em> 一系列操作，再一次性上传 */</p>
+<p>/* 如果写错了，也可以使用回滚，就是写入之前commit上传的操作，然后它会自动帮你回到原来的状态<br> <em>/<br> start transaction;<br> xxxxxxxx<br> xxxxxxxx<br> xxxxxxxx<br> /</em> 和上面的commit里面的代码一样<br>  <em>/<br>  rollback;<br>  /</em> 这里会自动帮你恢复原来的状态 */</p>
+<p>  /* 其实每一句sql就是一个事务，这是在自动提交情况下的<br>  commit算停止一个事务 */</p>
+<p>  /* acid特性<br>  原子性，一个事务要么全部执行，要么不执行<br>  一致性，事务的处理要满足数据库提前设置的约束，如果不满足，同一个事务里面的已经执行的也会回滚<br>  隔离性，不同的事务里面是互不相通的<br>  持久性，它的数据会存在，防止数据库故障数据丢失<br>   */</p>
 
       
 
@@ -250,7 +246,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">md</a>
         		</li>
       		
 		</ul>
@@ -306,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-4/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +316,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/04/mysql-5/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-4-插入.md
+          mysql-5-视图.md
         
       </div>
     </a>
   
   
-    <a href="/2020/09/04/mysql-2-%E6%9F%A5%E8%AF%A2%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-2-查询基础.md</div>
+    <a href="/2020/09/04/mysql-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-3-聚合函数.md</div>
       <i class="icon-circle-right"></i>
     </a>
   

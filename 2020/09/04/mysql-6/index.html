@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-5-视图.md | 小张的博客</title>
+  <title>mysql-6-函数.md | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&#x2F;* 视图 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间&#x2F;use shop; &#x2F; create view productsum(product_type,cnt_product) as select product_type,count() from product group by product_type; *&#x2F; &#x2F; 相当于是对selec">
+  <meta name="description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-5-视图.md">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/index.html">
+<meta property="og:title" content="mysql-6-函数.md">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-6/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="&#x2F;* 视图 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间&#x2F;use shop; &#x2F; create view productsum(product_type,cnt_product) as select product_type,count() from product group by product_type; *&#x2F; &#x2F; 相当于是对selec">
+<meta property="og:description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:18:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T23:38:12.857Z">
+<meta property="article:published_time" content="2020-09-03T23:18:20.000Z">
+<meta property="article:modified_time" content="2020-09-03T23:50:38.301Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -160,46 +160,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-5-视图" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql-6" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-5-视图.md
+      mysql-6-函数.md
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-5-视图.md
+      mysql-6-函数.md
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/04/mysql-6/" class="archive-article-date">
+  	<time datetime="2020-09-03T23:18:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/* 视图<br> 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间<em>/<br>use shop;<br> /</em> create view productsum(product_type,cnt_product) as select product_type,count(<em>) from product group by product_type; */<br> /</em> 相当于是对select起一个简单的代称,设置一个select查询的快捷键 <em>/<br> /</em> select product_type,cnt_product from productsum; <em>/<br>/</em> 以后要查询这样的格式，直接用productsum就行 */</p>
-<p>/* 多重视图 <em>/<br>/</em> 在一重视图的基础上还可以再弄一层视图 <em>/<br>/</em> create view productSumJim(product_type,cnt_product) as select product type,cnt product from productSum where product_type = ‘办公用品’; <em>/<br>/</em> select product_type,cnt_product from productSumJim; <em>/<br>/</em> 这里可能多重view mysql不适用 */</p>
-<p>/* 定义视图时，不能使用order by语句 <em>/<br>/</em> 因为表和view差不多，都是使用数据的 */</p>
-<p>/* 和select绑定的view一般下满足一下条件才能更新 <em>/<br>/</em> select子句未有distinct<br>from子句一张表<br>未有group语句<br>未使用having语句 <em>/<br>/</em> 如果是group后的已经是汇总的了，这个时候就难以更新<br>因为view和table需要同时更新<br>如果不是的话，单纯where的话，就可以使用insert这一些 */</p>
-<p>/* 删除使用<br>drop view productSum */</p>
-<p>/* 子查询<br> 一次性的，创造的子图并不会存在硬盘里面<br> 这样的话，它是定义在from里面的<br> <em>/<br>  /</em> select product_type,cnt_product from(select product_type,count(<em>) as cnt_product from product group by product_type) as productsum; */<br>  /</em> 这里的话product_type最好上下统一 <em>/<br>  /</em> 这里是里面的from里面的select先执行，然后的话再执行外层的select</p>
-<p>  因为from里面还可以在增加select，所以这里就是无限嵌套 <em>/<br>  /</em> select product_type,cnt_product<br>  from (select *<br>  from (select product_type,,count(*) as cnt_product from product group by product_type) as product_Sum<br>  where cnt<br>  =4<br>  ) as productSum2; */</p>
-<p>  /* 标量子查询<br>  只能返回某一行某一列的值 */</p>
-<p>  /* where里面使用标量子查询</p>
-<p>  where sale_price&gt; avg(sale_price);但是这里不能有聚合函数，如何做</p>
-<p>  where sale_price&gt;(select avg(sale_price) from product);这里只要保证括号里面说一个返回值就行<br>   <em>/<br>/</em> 使用一个括号就能当做一个整体 */</p>
-<p>/* 只要能保证说能返回一个，那么可以用在select,where,from,having,等等 */</p>
-<p>/* 关联子查询 <em>/<br>/</em> 在细分的组内比较使用<br>关联子查询和group by差不多，可以对数据进行切分<br>子查询里面要有关联子查询的条件<br> <em>/<br> /</em> 如果标量子句里面有groupby的话就会报错，因为它是分组，它会返回多个结果<br>  <em>/<br>  – select product_type,product_name,sale_price from product as p1<br>  – where sale_price&gt;(select avg(sale_price)<br>  – from product as p2<br>  – where p1.product_type=p2.product_type<br>  – group by product_type);<br>  /</em> 这里的原理是<br>select其实是一个个循环去比较的，这里的主体我们设为p1,它是大于该类的平均值在输出<br>这个内层呢，它是先分成一个个类，然后各自算出平均值，这里的主体是p2,这里其实是二重循环，只有当外层的种类等于内部当前循环的种类才会输出进行比较<br>这里的where p1.product_type=p2.product_type是关键，他把外部的条件和内部联系起来，只有内层的某一条件满足了才能输出这个标量<br>这个要写在子查询里面<br>关联名称有有效范围，在当前的范围，p2其实在外层就不存在了<br>*/</p>
+        <p>– 函数<br>use shop;<br>– create table sampleMath(<br>–         m numeric(10,3),<br>–         n integer,<br>–         p integer<br>– );</p>
+<p>– start transaction;<br>– insert into sampleMath values(500,0,NULL);<br>– insert into sampleMath values(-180,0,NULL);<br>– insert into sampleMath values(NULL,NULL,NULL);<br>– insert into sampleMath values(NULL,7,3);<br>– insert into sampleMath values(NULL,5,2);<br>– insert into sampleMath values(NULL,4,NULL);<br>– insert into sampleMath values(8,NULL,3);<br>– insert into sampleMath values(2.27,1,NULL);<br>– insert into sampleMath values(5.555,2,NULL);<br>– insert into sampleMath values(NULL,1,NULL);<br>– insert into sampleMath values(8.76,NULL,NULL);<br>– commit;</p>
+<p>– select m,abs(m) as abs_result from sampleMath;<br>– 创绝对值</p>
+<p>– mod()求余<br>– select n,p,mod(n,p) as mod_result from sampleMath;<br>– 这里mod是两个因素，然后里面有一个null，就会报错</p>
+<p>– round(数值，保留位数)<br>– select m,n, round(m,n) as round_result from sampleMath;</p>
+<p>– create table samplestr(<br>–          str1 varchar(40),<br>–          str2 varchar(40),<br>–          str3 varchar(40)<br>– );<br>– alter table samplestr convert to character set utf8mb4 collate utf8mb4_bin;<br>– start transaction;<br>– insert into samplestr(str1,str2,str3) values(‘opx’,’rt’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘abc’,’def’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘山田’,’太郎’,’是我’);<br>– insert into samplestr(str1,str2,str3) values(‘aaa’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(NULL,’xyz’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘@!#$%’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘ABC’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘aBC’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘abc太郎’,’abc’,’ABC’);<br>– insert into samplestr(str1,str2,str3) values(‘abcdefabc’,’abc’,’ABC’);<br>– insert into samplestr(str1,str2,str3) values(‘micmic’,’i’,’I’);<br>– commit;<br>– select * from samplestr;</p>
+<p>–  concat()拼接<br>– select str1,str2,concat(str1,str2) as str_result from samplestr;</p>
+<p>– length(str1) 求长度</p>
+<p>– lower小写转换<br>– replace(a,b,c)//把a字符串里面的b换成c</p>
+<p>– substring(str,index,number)这里截取字符串，下标1开始，然后的话从index开始，截取number个字符</p>
+<p>– upper（str）大写转换</p>
+<p>– 日期函数<br>– select current_date;显示当前时间</p>
+<p>– select current_timestamp;获得当前的时间，和日期</p>
+<p>– 截取时间元素<br>– select current_timestamp,<br>– extract(year from current_timestamp) as year,<br>– extract(month from current_timestamp) as month,<br>– extract(day from current_timestamp) as day,<br>– extract(hour from current_timestamp) as hour,<br>– extract(minute from current_timestamp) as minute,<br>– extract(second from current_timestamp) as second;<br>– 这里的话是可以在current_timestamp这个时间对象截取部分的对象</p>
+<p>– 转换函数<br>– cast(转换前的值 as 想要转换的数据类型)<br>– select cast(‘0001’ as integer)as in_col from dual;<br>– 这里的话对一个对象转换，并返回转化后的情况<br>– select cast(‘2019-09-16’ as date) as data_col from from dual;</p>
+<p>– coalesce 把NULL转化为其他值<br>– 这里参数的个数不固定<br>– select coalesce(str2,’NULL’) from samplestr;<br>– 这里是对str2的这个列里面的NULL替换为’NULL’</p>
+<p>– create table samplelike(<br>– strcol varchar(6) not null,<br>– primary key(strcol)</p>
+<p>– );</p>
+<p>– start transaction;<br>– insert into samplelike (strcol) values (‘abcddd’);后方一致<br>– insert into samplelike (strcol) values (‘dddabc’);前方一致<br>– insert into samplelike (strcol) values (‘abdddc’);中间一致<br>– insert into samplelike (strcol) values (‘abcdd’);<br>– insert into samplelike (strcol) values (‘ddabc’);<br>– insert into samplelike (strcol) values (‘abddc’);<br>– commit;</p>
+<p>– select * from samplelike;<br>– select * from samplelike where strcol like’ddd%’;<br>– 这里使用到了正则表达式的思想,前方一致<br>– select * from samplelike where strcol like ‘%ddd%’;<br>– 中间一致，只要出现了目标字符串就行；<br>– select * from samplelike where strcol like ‘%ddd’;<br>– 后方一致，目标字符串在后方</p>
+<p>– 这里 的 % 是任意长度的，而 <em>是只有一个长度的<br>– select * from samplelike where strcol like ‘dd_b%’;<br>– 这里中间夹了个</em>,代表中间是可以有一个任意字符的<br>– select * from samplelike where strcol like ‘dd___’;</p>
+<p>– 范围查询between</p>
+<p>– select product_name,sale_price from product<br>– where sale_price between 100 and 2000;//筛选满足的范围之内的<br>– where sale_price &lt;=2000 and sale_price &gt;=100;<br>– 这两句意思其实差不多</p>
+<p>– is NULL ,is not NULL 判断是不是NULL的<br>– in -&gt;or的简便用法<br>– select product_name,purchase_pricce from product where purchase_pricce in (320,500,5000);<br>– 这里的参数个数不限，只要值能满足其中一个就可以了<br>– select product_name,purchase_price from product where purchase_price not in (320,500);<br>– 这里是不在范围内的，这里是无法针对NULL的值做出处理的</p>
+<p>– 使用子查询作为in谓词的参数<br>– primary key可以有两个标签的<br>– 这个In的对象是多个结果的，如果子句select返回多个对象，也是可行的</p>
+<p>– select product_name,sale_price from product where product_id in(select product_id<br>– from shopproduct where shop_id=’000c’)<br>– 这里的话，它是where里面的in了select返回的product_id的多个对象组<br>– 子查询开始执行，这里的话，同一个语句也可以涉及到不同的表对象</p>
+<p>– 其实的话select相当于返回一个集合对象</p>
+<p>– exist判断是否存在满足某种条件的记录<br>– 如果存在这种记录就返回真，否则就返回假<br>– select product_name,sale_price<br>– from product as product<br>– where exists(select * from<br>– shopproduct as sp<br>– where sp.shop_id=’000C’ and sp.product_id =p.product_id);<br>– 这里的原理是exists 判断子句的select返回的是不是空集，因此，这里的select的条件要做到说它要么返回结果的，要嘛就是空集的那种<br>– 这里的话要判断两个表，我们不妨弄两个对象来代表两个表，在同一个where对象里面去对比<br>– exists是只有一个参数的<br>– 这里的exists使用关联子函数<br>– not exists是当某个数值不满足子条件是就输出</p>
+<p>– case表达式<br>– 分为简单case表达式和搜索case表达式<br>– case的else子句是可以省略的，end是不能省略的<br>– case表达式能够和select进行组合<br>– 这个和c语言的switch差不多<br>– case<br>–  when 条件表达式 then 操作<br>–  when 条件表达式 then 操作<br>–  when 条件表达式 then 操作<br>–  else &lt;表达式&gt;<br>–  这里其实只返回一个结果，所以可以作为标量作为输出</p>
+<p>– select product_name,<br>– case when product_type = ‘衣服’<br>– then concat(‘A’,product_type)<br>– when product_type=’办公用品’<br>– then concat(‘B’,product_type)<br>– when product_type=’厨房用具’<br>– then concat(‘C’,product_type)<br>– else NULL<br>– end as abc_product_type<br>– from product;<br>– 这里一遍下来，中间没有符号，这里的case相当于就是switch<br>– 它本质还是输出一个表达式的值</p>
+<p>– 行列转换<br>select sum(case when product_type=’衣服’ then sale_price else 0 end ) as sum_cloth,<br>sum(case when product_type=’厨房用具’ then sale_price else 0 end ) as sum_cook,<br>sum(case when product_type=’办公用品’ then sale_price else 0 end ) as sum_office<br> from product;<br>–  这里各自把sum(when….)作为输出值，达到group by的效果</p>
+<p>– 简单case表达式<br>select product_type,<br>case product_type<br>when ‘衣服’ then concat(‘A’,product_type)<br>when ‘厨房用具’ then concat(‘B’,product_type)<br>when ‘办公用品’ then concat(‘C’,product_type)<br>else NULL<br>end as abc_product_type<br>from product;<br>– 这里的区别是把左值放case的后面，然后的话，把右值部分放when那里</p>
 
       
 
@@ -297,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-5-%E8%A7%86%E5%9B%BE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -311,18 +330,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/04/mysql-6-%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/04/mysql-7/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-6-函数.md
+          mysql-7-联结
         
       </div>
     </a>
   
   
-    <a href="/2020/09/04/mysql-4-%E6%8F%92%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-4-插入.md</div>
+    <a href="/2020/09/04/mysql-5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-5-视图.md</div>
       <i class="icon-circle-right"></i>
     </a>
   
