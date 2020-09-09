@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-5-视图.md | 小张的博客</title>
+  <title>mysql-5-视图 | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&#x2F;* 视图 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间&#x2F;use shop; &#x2F; create view productsum(product_type,cnt_product) as select product_type,count() from product group by product_type; *&#x2F; &#x2F; 相当于是对selec">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-5-视图.md">
+<meta property="og:title" content="mysql-5-视图">
 <meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-5/index.html">
 <meta property="og:site_name" content="小张的博客">
 <meta property="og:description" content="&#x2F;* 视图 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间&#x2F;use shop; &#x2F; create view productsum(product_type,cnt_product) as select product_type,count() from product group by product_type; *&#x2F; &#x2F; 相当于是对selec">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:18:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T16:14:23.349Z">
+<meta property="article:modified_time" content="2020-09-09T08:25:02.432Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -167,14 +167,14 @@
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-5-视图.md
+      mysql-5-视图
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-5-视图.md
+      mysql-5-视图
     </h1>
   
 </p></center>
@@ -187,9 +187,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/* 视图<br> 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间<em>/<br>use shop;<br> /</em> create view productsum(product_type,cnt_product) as select product_type,count(<em>) from product group by product_type; */<br> /</em> 相当于是对select起一个简单的代称,设置一个select查询的快捷键 <em>/<br> /</em> select product_type,cnt_product from productsum; <em>/<br>/</em> 以后要查询这样的格式，直接用productsum就行 */</p>
+        <p>/* 视图<br> 一般情况下数据都是存储到硬盘里面的，但是视图它是存储select，相当于只存储那个结果，减少内存空间<em>/<br>use shop;<br> /</em> create view productsum(product_type,cnt_product) as select product_type,count(<em>) from product group by product_type; */<br> /</em> 相当于是对select起一个简单的代称,设置一个select查询的快捷键 <em>/<br> <a id="more"></a><br> /</em> select product_type,cnt_product from productsum; <em>/<br>/</em> 以后要查询这样的格式，直接用productsum就行 */</p>
 <p>/* 多重视图 <em>/<br>/</em> 在一重视图的基础上还可以再弄一层视图 <em>/<br>/</em> create view productSumJim(product_type,cnt_product) as select product type,cnt product from productSum where product_type = ‘办公用品’; <em>/<br>/</em> select product_type,cnt_product from productSumJim; <em>/<br>/</em> 这里可能多重view mysql不适用 */</p>
-<a id="more"></a>
 <p>/* 定义视图时，不能使用order by语句 <em>/<br>/</em> 因为表和view差不多，都是使用数据的 */</p>
 <p>/* 和select绑定的view一般下满足一下条件才能更新 <em>/<br>/</em> select子句未有distinct<br>from子句一张表<br>未有group语句<br>未使用having语句 <em>/<br>/</em> 如果是group后的已经是汇总的了，这个时候就难以更新<br>因为view和table需要同时更新<br>如果不是的话，单纯where的话，就可以使用insert这一些 */</p>
 <p>/* 删除使用<br>drop view productSum */</p>
@@ -316,14 +315,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-6-函数.md
+          mysql-6-函数
         
       </div>
     </a>
   
   
     <a href="/2020/09/04/mysql-4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-4-插入.md</div>
+      <div class="article-nav-title">mysql-4-插入</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -453,7 +452,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">md</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
             
             <div class="clearfix"></div>

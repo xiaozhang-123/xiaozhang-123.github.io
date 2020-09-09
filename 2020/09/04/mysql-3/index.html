@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-3-聚合函数.md | 小张的博客</title>
+  <title>mysql-3-聚合函数 | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop;">
+  <meta name="description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-3-聚合函数.md">
+<meta property="og:title" content="mysql-3-聚合函数">
 <meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-3/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和avg：平均值max:最大值min：最小值 *&#x2F;use shop;">
+<meta property="og:description" content="&#x2F;* 聚合查询 &#x2F;&#x2F; 聚合函数：对数据进行某种操作可以使用函数,例如count:计算行数sum：总和">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:17:26.000Z">
-<meta property="article:modified_time" content="2020-09-03T16:13:56.010Z">
+<meta property="article:modified_time" content="2020-09-09T08:22:16.628Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -167,14 +167,14 @@
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-3-聚合函数.md
+      mysql-3-聚合函数
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-3-聚合函数.md
+      mysql-3-聚合函数
     </h1>
   
 </p></center>
@@ -187,8 +187,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/* 聚合查询 <em>/<br>/</em> 聚合函数：对数据进行某种操作可以使用函数,例如<br>count:计算行数<br>sum：总和<br>avg：平均值<br>max:最大值<br>min：最小值 */<br>use shop;</p>
+        <p>/* 聚合查询 <em>/<br>/</em> 聚合函数：对数据进行某种操作可以使用函数,例如<br>count:计算行数<br>sum：总和</p>
 <a id="more"></a>
+<p>avg：平均值<br>max:最大值<br>min：最小值 */<br>use shop;</p>
 <p>/* 计算行数 <em>/<br>/</em> select count(<em>) from product; */<br>/</em> 这里的<em>是全部列的意思 *，当然我们也可以指定某一个列来做标准，这里的结果 是非NULL的</em>/<br>/* select count(purchase_price) from product; <em>/<br>/</em> 这里算行，非NULL的，输入不同的行结果就不一样 <em>/<br>/</em> select count(<em>),count(purchase_price) from product; */<br>/</em> 只有count才可以使用*作为形参 */</p>
 <p>/* 计算和 <em>/<br>/</em> select sum(sale_price-purchase_price) as “利润和” from product;//不建议这么写 <em>/<br>/</em> select sum(sale_price),sum(purchase_price) from product;//分开写会好一点 <em>/<br>/</em> —如果值里面有NULL，那么这一列会被排除在外 */</p>
 <p>/* 平均值同理，会自动算平均值，会把有NULL的那两列给清除 */</p>
@@ -325,14 +326,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql-4-插入.md
+          mysql-4-插入
         
       </div>
     </a>
   
   
     <a href="/2020/09/04/mysql-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-2-查询基础.md</div>
+      <div class="article-nav-title">mysql-2-查询基础</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -462,7 +463,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">md</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
             
             <div class="clearfix"></div>

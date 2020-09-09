@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-6-函数.md | 小张的博客</title>
+  <title>mysql-6-函数 | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
+  <meta name="description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– );">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-6-函数.md">
+<meta property="og:title" content="mysql-6-函数">
 <meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-6/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– ); – start transaction;– insert into sampleMath values(500,0,NULL);– insert into sampleMath va">
+<meta property="og:description" content="– 函数use shop;– create table sampleMath(–         m numeric(10,3),–         n integer,–         p integer– );">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T23:18:20.000Z">
-<meta property="article:modified_time" content="2020-09-03T16:14:48.846Z">
+<meta property="article:modified_time" content="2020-09-09T08:24:47.372Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="mysql基础">
 <meta name="twitter:card" content="summary">
@@ -167,14 +167,14 @@
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-6-函数.md
+      mysql-6-函数
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-6-函数.md
+      mysql-6-函数
     </h1>
   
 </p></center>
@@ -188,9 +188,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>– 函数<br>use shop;<br>– create table sampleMath(<br>–         m numeric(10,3),<br>–         n integer,<br>–         p integer<br>– );</p>
+<a id="more"></a>
 <p>– start transaction;<br>– insert into sampleMath values(500,0,NULL);<br>– insert into sampleMath values(-180,0,NULL);<br>– insert into sampleMath values(NULL,NULL,NULL);<br>– insert into sampleMath values(NULL,7,3);<br>– insert into sampleMath values(NULL,5,2);<br>– insert into sampleMath values(NULL,4,NULL);<br>– insert into sampleMath values(8,NULL,3);<br>– insert into sampleMath values(2.27,1,NULL);<br>– insert into sampleMath values(5.555,2,NULL);<br>– insert into sampleMath values(NULL,1,NULL);<br>– insert into sampleMath values(8.76,NULL,NULL);<br>– commit;</p>
 <p>– select m,abs(m) as abs_result from sampleMath;<br>– 创绝对值</p>
-<a id="more"></a>
 <p>– mod()求余<br>– select n,p,mod(n,p) as mod_result from sampleMath;<br>– 这里mod是两个因素，然后里面有一个null，就会报错</p>
 <p>– round(数值，保留位数)<br>– select m,n, round(m,n) as round_result from sampleMath;</p>
 <p>– create table samplestr(<br>–          str1 varchar(40),<br>–          str2 varchar(40),<br>–          str3 varchar(40)<br>– );<br>– alter table samplestr convert to character set utf8mb4 collate utf8mb4_bin;<br>– start transaction;<br>– insert into samplestr(str1,str2,str3) values(‘opx’,’rt’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘abc’,’def’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘山田’,’太郎’,’是我’);<br>– insert into samplestr(str1,str2,str3) values(‘aaa’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(NULL,’xyz’,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘@!#$%’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘ABC’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘aBC’,NULL,NULL);<br>– insert into samplestr(str1,str2,str3) values(‘abc太郎’,’abc’,’ABC’);<br>– insert into samplestr(str1,str2,str3) values(‘abcdefabc’,’abc’,’ABC’);<br>– insert into samplestr(str1,str2,str3) values(‘micmic’,’i’,’I’);<br>– commit;<br>– select * from samplestr;</p>
@@ -342,7 +342,7 @@
   
   
     <a href="/2020/09/04/mysql-5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-5-视图.md</div>
+      <div class="article-nav-title">mysql-5-视图</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -472,7 +472,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">md</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
             
             <div class="clearfix"></div>
