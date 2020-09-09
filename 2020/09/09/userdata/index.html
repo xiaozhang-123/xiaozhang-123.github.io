@@ -6,14 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>userdat | 小张的博客</title>
+  <title>userdata | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用户管理小系统总结           涉及到的部分技术:dbc,druid,templete,jsp,tomcat user对象，存储每个人的信息 12345678910111213public class User &amp;#123;    &#x2F;&#x2F;一行行用户的对象    private int id;    private String name;    private String gen">
+  <meta name="description" content="用户管理小系统总结           涉及到的部分技术:dbc,druid,templete,jsp,tomcat项目地址: https:&#x2F;&#x2F;github.com&#x2F;xiaozhang-123&#x2F;myimage&#x2F;raw&#x2F;master&#x2F;userdata-code.zipuser对象，存储每个人的信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="userdat">
+<meta property="og:title" content="userdata">
 <meta property="og:url" content="http://yoursite.com/2020/09/09/userdata/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="用户管理小系统总结           涉及到的部分技术:dbc,druid,templete,jsp,tomcat user对象，存储每个人的信息 12345678910111213public class User &amp;#123;    &#x2F;&#x2F;一行行用户的对象    private int id;    private String name;    private String gen">
+<meta property="og:description" content="用户管理小系统总结           涉及到的部分技术:dbc,druid,templete,jsp,tomcat项目地址: https:&#x2F;&#x2F;github.com&#x2F;xiaozhang-123&#x2F;myimage&#x2F;raw&#x2F;master&#x2F;userdata-code.zipuser对象，存储每个人的信息">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/xiaozhang-123/myimage/raw/master/loginhtml.png">
 <meta property="og:image" content="https://github.com/xiaozhang-123/myimage/raw/master/listhtml.png">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://github.com/xiaozhang-123/myimage/raw/master/add.bmp">
 <meta property="og:image" content="https://github.com/xiaozhang-123/myimage/raw/master/delete.bmp">
 <meta property="article:published_time" content="2020-09-08T23:18:20.000Z">
-<meta property="article:modified_time" content="2020-09-09T09:29:16.305Z">
+<meta property="article:modified_time" content="2020-09-09T09:38:48.074Z">
 <meta property="article:author" content="xiao zhang">
 <meta property="article:tag" content="project">
 <meta name="twitter:card" content="summary">
@@ -175,14 +175,14 @@
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      userdat
+      userdata
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      userdat
+      userdata
     </h1>
   
 </p></center>
@@ -203,8 +203,8 @@
 
 
 
-<h2 id="涉及到的部分"><a href="#涉及到的部分" class="headerlink" title="涉及到的部分"></a>涉及到的部分</h2><p>技术:dbc,druid,templete,jsp,tomcat</p>
-<p>user对象，存储每个人的信息</p>
+<h2 id="涉及到的部分"><a href="#涉及到的部分" class="headerlink" title="涉及到的部分"></a>涉及到的部分</h2><p>技术:dbc,druid,templete,jsp,tomcat<br>项目地址: <a href="https://github.com/xiaozhang-123/myimage/raw/master/userdata-code.zip" target="_blank" rel="noopener">https://github.com/xiaozhang-123/myimage/raw/master/userdata-code.zip</a><br>user对象，存储每个人的信息</p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="comment">//一行行用户的对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">    <span class="keyword">private</span> String qq;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>由于这个网页，它是分页显示不同的数据，因此我们也要分页，这里在这里设立不同页的对象</p>
@@ -280,6 +280,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;<span class="comment">//删</span></span><br><span class="line">       <span class="comment">//1.定义sql</span></span><br><span class="line">       String sql = <span class="string">"delete from user where id = ?"</span>;</span><br><span class="line">       <span class="comment">//2.执行sql</span></span><br><span class="line">       template.update(sql, id);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
 
       
