@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-8-窗口函数 | 小张的博客</title>
+  <title>关于java的一些东西 | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="use shop;– 这里使用窗口函数，partition by用法– 这里窗口的意思，不是一个个窗口的意思，是范围– 它能够像group by那样进行分类，但是不把每个类都合并起来 select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as r">
+  <meta name="description" content="idea快捷键设置ctrl alt b 查看类源码alt -&gt;   alt &lt;- 返回或者到下一个光标ctrl alt u 类继承关系树ctrl h查看继承树ctrl alt f7  查看变量在哪调用alt 7看看有什么方法 编译javac xxx.java 编译（不带包名） java xxx 运行 设置编译的编码 (javac默认以系统的编码编译）javac xxx.java  -e">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-8-窗口函数">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-8/index.html">
+<meta property="og:title" content="关于java的一些东西">
+<meta property="og:url" content="http://yoursite.com/2020/09/11/javatips/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="use shop;– 这里使用窗口函数，partition by用法– 这里窗口的意思，不是一个个窗口的意思，是范围– 它能够像group by那样进行分类，但是不把每个类都合并起来 select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as r">
+<meta property="og:description" content="idea快捷键设置ctrl alt b 查看类源码alt -&gt;   alt &lt;- 返回或者到下一个光标ctrl alt u 类继承关系树ctrl h查看继承树ctrl alt f7  查看变量在哪调用alt 7看看有什么方法 编译javac xxx.java 编译（不带包名） java xxx 运行 设置编译的编码 (javac默认以系统的编码编译）javac xxx.java  -e">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:21:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T16:16:01.629Z">
+<meta property="article:published_time" content="2020-09-10T17:20:30.000Z">
+<meta property="article:modified_time" content="2020-09-10T17:20:52.896Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="mysql基础">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,43 +160,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-javatips" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
       <!-- 
   
     <h1 class="article-title" itemprop="name">
-      mysql-8-窗口函数
+      关于java的一些东西
     </h1>
   
  -->
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      mysql-8-窗口函数
+      关于java的一些东西
     </h1>
   
 </p></center>
         
-        <a href="/2020/09/04/mysql-8/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:21:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+        <a href="/2020/09/11/javatips/" class="archive-article-date">
+  	<time datetime="2020-09-10T17:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>use shop;<br>– 这里使用窗口函数，partition by用法<br>– 这里窗口的意思，不是一个个窗口的意思，是范围<br>– 它能够像group by那样进行分类，但是不把每个类都合并起来<br> select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as ranking from product;<br>–  这里的ranking意思是记录窗口的意思，计算记录排序<br>– 里面的ｐａｒｔｉｔｉｏｎ先是对type进行分类，然后的话，ｏｒｄｅｒ再进行排序，这里的好处就是同类不合并在一起</p>
-<p>– 这里无partition by也行</p>
-<p>select product_name ,product_type,sale_price rank () over(order by sale_price) as ranking from product;</p>
-<p>– over这样的窗口函数不适合在where 或者group by子句里面使用<br>select product_id, product_name,sale_price sum(sale_price) over(order by product_id) as current_sum from product;<br>– 这里是按照id来排序，也就是按顺序排，然后这里的话，它也就是第一行计算和，每一行的结果计算从第一行开始，累计到这行的和。<br>– ａｖｇ也类似，这是在窗口函数里面使用聚合函数的结果</p>
-<a id="more"></a>
-<p>select product_id,product_name,sale_price,avg(sale_price) over (order by product_id rows 2 preceding ) as moving_avg from product;<br>– 这里的话，rows 2preceding的含义是截止到前面两行，也就是和上自己这一行，它这个平均数会算（自己和前面两列的）的平均数<br>– rows x preceding 也叫移动平均</p>
-<p>– 如果是要计算自己的一行和前面一行，和后一行<br>– select product_id,product_name,sale_price,avg(sale_price) over (order by product_id) rows between 1 preceding and 1 following as moving_avg from product;</p>
-<p>– 使用group by要计算合计和小计是比较麻烦的，这里使用grouping来计算<br>select product_type,sum(sale_price) as sum_price from product group by product_type with rollup;<br>– 计算出不同聚合键组合的结果</p>
-<p>– grouping函数能够分辨出null<br>select grouping(product_type) as product_type, grouping(regist_date) as regist_date,sum(sale_price) as sum_price from product group by rollup(product_type,regist_date);<br>– 这里的话，按product_type,regist_date排序，然后regist_date被grouping处理后会出现，没有null就是１，ｎｕｌｌ就是０</p>
-<p>– cube该句的功能是，它能够把所有可能的情况都组合一遍，就是三次方，把三者都相乘</p>
+        <h2 id="idea快捷键设置"><a href="#idea快捷键设置" class="headerlink" title="idea快捷键设置"></a>idea快捷键设置</h2><p>ctrl alt b 查看类源码<br>alt -&gt;   alt &lt;- 返回或者到下一个光标<br>ctrl alt u 类继承关系树<br>ctrl h查看继承树<br>ctrl alt f7  查看变量在哪调用<br>alt 7看看有什么方法</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>javac xxx.java 编译（不带包名）</p>
+<p>java xxx 运行</p>
+<p>设置编译的编码 (javac默认以系统的编码编译）<br>javac xxx.java  -encoding utf-8</p>
+<p>默认情况下，写带包名的必须有带有完整路径<br>但是<br> javac -d<br>可以当前路径进行，省下完整路径<br>只需当前包名.类就行</p>
+<p>javac -cp  xxx.xxx  xxxxx.a.class<br>指定某个包放在哪一个文件夹下</p>
+<h2 id="关于java输入的问题"><a href="#关于java输入的问题" class="headerlink" title="关于java输入的问题"></a>关于java输入的问题</h2><p>Scanner sc=new Scanner(System.in);<br>sc.nextLine(); //它是能够读取一整行，直到回车键<br>sc.nextInt();//遇非数字报错，但是不停止</p>
+<p>但是如果要输入任意个单词，nextLine就解决<br>但是任意个数字就比较麻烦<br>while(sc.hasNextInt()){<br>num=sc.NextInt();<br>}<br>//这个会因为无法退出循环，但是会隐式报错。输入回车也不会读取，留在缓冲区</p>
+<p>所以方法一是弄一个try截取到错误时，然后退出</p>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class TestArray &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Scanner sc&#x3D;new Scanner(System.in);</span><br><span class="line">        String[] str&#x3D;sc.nextLine().split(&quot; &quot;);&#x2F;&#x2F;这个一整行输入，然后利用空格隔开，之后转化成数字。</span><br><span class="line">        sc.close();</span><br><span class="line">        int[] Sim&#x3D;new int[str.length];&#x2F;&#x2F;根据情况配置实际长度，防止过长的列表，使得一大堆未初始化的，就排序排到最前面的0</span><br><span class="line"></span><br><span class="line">        for( int i&#x3D;0;i&lt;str.length;i++) &#123;</span><br><span class="line">            Sim[i] &#x3D; Integer.parseInt(String.valueOf(str[i]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Arrays.sort(Sim);&#x2F;&#x2F;排序</span><br><span class="line">        for(int j&#x3D;0;j&lt;str.length;j++)&#123;</span><br><span class="line">            System.out.print(Sim[j]+&quot; &quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用nextLine，然后切割，转化成数字</p>
 
       
 
@@ -238,7 +240,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -294,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/11/javatips/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -308,18 +310,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/09/09/userdata/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          用户管理小系统总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/09/04/mysql-7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-7-联结</div>
+    <a href="/2020/09/09/userdata/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用户管理小系统总结</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>mysql-8-窗口函数 | 小张的博客</title>
+  <title>Tag: Java | 小张的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="use shop;– 这里使用窗口函数，partition by用法– 这里窗口的意思，不是一个个窗口的意思，是范围– 它能够像group by那样进行分类，但是不把每个类都合并起来 select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as r">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql-8-窗口函数">
-<meta property="og:url" content="http://yoursite.com/2020/09/04/mysql-8/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="小张的博客">
+<meta property="og:url" content="http://yoursite.com/tags/Java/index.html">
 <meta property="og:site_name" content="小张的博客">
-<meta property="og:description" content="use shop;– 这里使用窗口函数，partition by用法– 这里窗口的意思，不是一个个窗口的意思，是范围– 它能够像group by那样进行分类，但是不把每个类都合并起来 select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as r">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-03T23:21:10.000Z">
-<meta property="article:modified_time" content="2020-09-03T16:16:01.629Z">
 <meta property="article:author" content="xiao zhang">
-<meta property="article:tag" content="mysql基础">
+<meta property="article:tag" content="hello world">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="小张的博客" type="application/atom+xml">
@@ -160,199 +156,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql-8" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
-      <!-- 
-  
-    <h1 class="article-title" itemprop="name">
-      mysql-8-窗口函数
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 class="article-title_code_ant" itemprop="name">
-      mysql-8-窗口函数
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/09/04/mysql-8/" class="archive-article-date">
-  	<time datetime="2020-09-03T23:21:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>use shop;<br>– 这里使用窗口函数，partition by用法<br>– 这里窗口的意思，不是一个个窗口的意思，是范围<br>– 它能够像group by那样进行分类，但是不把每个类都合并起来<br> select product_name,product_type,sale_price,rank()  over(partition by product_type order by sale_price) as ranking from product;<br>–  这里的ranking意思是记录窗口的意思，计算记录排序<br>– 里面的ｐａｒｔｉｔｉｏｎ先是对type进行分类，然后的话，ｏｒｄｅｒ再进行排序，这里的好处就是同类不合并在一起</p>
-<p>– 这里无partition by也行</p>
-<p>select product_name ,product_type,sale_price rank () over(order by sale_price) as ranking from product;</p>
-<p>– over这样的窗口函数不适合在where 或者group by子句里面使用<br>select product_id, product_name,sale_price sum(sale_price) over(order by product_id) as current_sum from product;<br>– 这里是按照id来排序，也就是按顺序排，然后这里的话，它也就是第一行计算和，每一行的结果计算从第一行开始，累计到这行的和。<br>– ａｖｇ也类似，这是在窗口函数里面使用聚合函数的结果</p>
-<a id="more"></a>
-<p>select product_id,product_name,sale_price,avg(sale_price) over (order by product_id rows 2 preceding ) as moving_avg from product;<br>– 这里的话，rows 2preceding的含义是截止到前面两行，也就是和上自己这一行，它这个平均数会算（自己和前面两列的）的平均数<br>– rows x preceding 也叫移动平均</p>
-<p>– 如果是要计算自己的一行和前面一行，和后一行<br>– select product_id,product_name,sale_price,avg(sale_price) over (order by product_id) rows between 1 preceding and 1 following as moving_avg from product;</p>
-<p>– 使用group by要计算合计和小计是比较麻烦的，这里使用grouping来计算<br>select product_type,sum(sale_price) as sum_price from product group by product_type with rollup;<br>– 计算出不同聚合键组合的结果</p>
-<p>– grouping函数能够分辨出null<br>select grouping(product_type) as product_type, grouping(regist_date) as regist_date,sum(sale_price) as sum_price from product group by rollup(product_type,regist_date);<br>– 这里的话，按product_type,regist_date排序，然后regist_date被grouping处理后会出现，没有null就是１，ｎｕｌｌ就是０</p>
-<p>– cube该句的功能是，它能够把所有可能的情况都组合一遍，就是三次方，把三者都相乘</p>
-
       
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
         </div>
-      
-    </div>
-    <!-- 添加本文结束标记-->
+        <div class="archives">
     
-      <div style="text-align:center;color: #00BFFF;font-size:14px;">
-         -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
-         </div>
-      
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/11/javatips/" class="archive-article-date">
+  	<time datetime="2020-09-10T17:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/11/javatips/">关于java的一些东西</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mysql基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/04/mysql-8/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/09/09/userdata/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          用户管理小系统总结
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/09/04/mysql-7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mysql-7-联结</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -375,9 +232,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

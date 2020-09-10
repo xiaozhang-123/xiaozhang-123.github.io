@@ -158,6 +158,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-javatips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+      <!-- 
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/11/javatips/">关于java的一些东西</a>
+    </h1>
+  
+ -->
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2020/09/11/javatips/">关于java的一些东西</a>
+    </h1>
+  
+</p></center>
+        
+        <a href="/2020/09/11/javatips/" class="archive-article-date">
+  	<time datetime="2020-09-10T17:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="idea快捷键设置"><a href="#idea快捷键设置" class="headerlink" title="idea快捷键设置"></a>idea快捷键设置</h2><p>ctrl alt b 查看类源码<br>alt -&gt;   alt &lt;- 返回或者到下一个光标<br>ctrl alt u 类继承关系树<br>ctrl h查看继承树<br>ctrl alt f7  查看变量在哪调用<br>alt 7看看有什么方法</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>javac xxx.java 编译（不带包名）</p>
+<p>java xxx 运行</p>
+<p>设置编译的编码 (javac默认以系统的编码编译）<br>javac xxx.java  -encoding utf-8</p>
+<p>默认情况下，写带包名的必须有带有完整路径<br>但是<br> javac -d<br>可以当前路径进行，省下完整路径<br>只需当前包名.类就行</p>
+<p>javac -cp  xxx.xxx  xxxxx.a.class<br>指定某个包放在哪一个文件夹下</p>
+<h2 id="关于java输入的问题"><a href="#关于java输入的问题" class="headerlink" title="关于java输入的问题"></a>关于java输入的问题</h2><p>Scanner sc=new Scanner(System.in);<br>sc.nextLine(); //它是能够读取一整行，直到回车键<br>sc.nextInt();//遇非数字报错，但是不停止</p>
+<p>但是如果要输入任意个单词，nextLine就解决<br>但是任意个数字就比较麻烦<br>while(sc.hasNextInt()){<br>num=sc.NextInt();<br>}<br>//这个会因为无法退出循环，但是会隐式报错。输入回车也不会读取，留在缓冲区</p>
+<p>所以方法一是弄一个try截取到错误时，然后退出</p>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class TestArray &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Scanner sc&#x3D;new Scanner(System.in);</span><br><span class="line">        String[] str&#x3D;sc.nextLine().split(&quot; &quot;);&#x2F;&#x2F;这个一整行输入，然后利用空格隔开，之后转化成数字。</span><br><span class="line">        sc.close();</span><br><span class="line">        int[] Sim&#x3D;new int[str.length];&#x2F;&#x2F;根据情况配置实际长度，防止过长的列表，使得一大堆未初始化的，就排序排到最前面的0</span><br><span class="line"></span><br><span class="line">        for( int i&#x3D;0;i&lt;str.length;i++) &#123;</span><br><span class="line">            Sim[i] &#x3D; Integer.parseInt(String.valueOf(str[i]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Arrays.sort(Sim);&#x2F;&#x2F;排序</span><br><span class="line">        for(int j&#x3D;0;j&lt;str.length;j++)&#123;</span><br><span class="line">            System.out.print(Sim[j]+&quot; &quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用nextLine，然后切割，转化成数字</p>
+
+      
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+    
+      <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/11/javatips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-userdata" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -165,14 +260,14 @@
       <!-- 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/09/userdata/">userdata</a>
+      <a class="article-title" href="/2020/09/09/userdata/">用户管理小系统总结</a>
     </h1>
   
  -->
       <center><p>
   
     <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/09/09/userdata/">userdata</a>
+      <a class="article-title_code_ant" href="/2020/09/09/userdata/">用户管理小系统总结</a>
     </h1>
   
 </p></center>
@@ -186,10 +281,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <div align='center'><font size='70'>
-    用户管理小系统总结
-    </font>
 
-</div>
+<pre><code>&lt;/font&gt;</code></pre></div>
 
 
 
@@ -928,80 +1021,6 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-      <!-- 
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/10/hello-world/">Hello World</a>
-    </h1>
-  
- -->
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2020/06/10/hello-world/">Hello World</a>
-    </h1>
-  
-</p></center>
-        
-        <a href="/2020/06/10/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-10T12:36:25.491Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
-        
-      
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-    
-      <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/10/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1097,6 +1116,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mysql基础</a>
